@@ -22,7 +22,7 @@ npm run dev
 | `NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL` | Member login / book training |
 | `NEXT_PUBLIC_SQUARESPACE_STORE_URL` | Operational store (default: `https://sft-training.com/store`) |
 
-Acuity URLs are not present in Squarespace static HTML; set them when Sam provides public scheduler links.
+Acuity URLs are read at build time from the vars above (adult/athlete embed on `/adults-intake-1` and `/athletes-intake`; member login in the site header).
 
 ## Blog content
 

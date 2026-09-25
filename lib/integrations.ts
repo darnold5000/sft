@@ -1,7 +1,4 @@
-/**
- * Acuity URLs are loaded from env. Squarespace embeds these dynamically on the
- * live site; nothing reliable was present in static HTML (data-acuity-url="").
- */
+/** Acuity / Squarespace Scheduling URLs from Vercel env (see `.env.example`). */
 export const ACUITY = {
   adultOnboarding:
     process.env.NEXT_PUBLIC_ACUITY_ADULT_URL?.trim() || "",
