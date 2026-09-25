@@ -22,7 +22,7 @@ npm run dev
 | `NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL` | Member login / book training |
 | `NEXT_PUBLIC_SQUARESPACE_STORE_URL` | Operational store (default: `https://sft-training.com/store`) |
 
-Acuity URLs are read at build time from the vars above (adult/athlete embed on `/adults-intake-1` and `/athletes-intake`; member login in the site header).
+Acuity URLs are read at build time from the vars above. Embeds use an iframe `src` plus `embed.acuityscheduling.com/js/embed.js` (see `components/public/acuity-embed.tsx`). Schedulers appear on `/adults` and `/athletes` and on legacy `/adults-intake-1` and `/athletes-intake`. Member login opens Acuity client login in a new tab from the site header.
 
 ## Blog content
 

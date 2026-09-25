@@ -1,7 +1,10 @@
-import Link from "next/link";
-import { buttonLinkClass } from "@/components/ui/button";
+import { OnboardingScheduleSection } from "@/components/public/onboarding-schedule-section";
+import { ScrollToLink } from "@/components/public/scroll-to-link";
 import { Section, SectionHeading } from "@/components/public/section";
-import { ONBOARDING_PATHS } from "@/lib/integrations";
+import {
+  ACUITY,
+  ONBOARDING_SECTION_IDS,
+} from "@/lib/integrations";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -28,31 +31,42 @@ const onboarding = [
 
 export default function AdultsPage() {
   return (
-    <Section>
-      <SectionHeading
-        title="Adult Training"
-        subtitle="Focused, personalized training built to meet you where you are at, and take you where you want to go."
+    <>
+      <Section>
+        <SectionHeading
+          title="Adult Training"
+          subtitle="Focused, personalized training built to meet you where you are at, and take you where you want to go."
+        />
+        <div className="mb-10">
+          <ScrollToLink
+            targetId={ONBOARDING_SECTION_IDS.adult}
+            variant="default"
+            size="lg"
+          >
+            Schedule your free consultation
+          </ScrollToLink>
+        </div>
+        <h3 className="font-heading text-2xl">What the adult program looks like</h3>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
+          {programPoints.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <h3 className="mt-12 font-heading text-2xl">Onboarding process</h3>
+        <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
+          {onboarding.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      </Section>
+
+      <OnboardingScheduleSection
+        sectionId={ONBOARDING_SECTION_IDS.adult}
+        scheduleUrl={ACUITY.adultOnboarding}
+        scheduleTitle="Adult Program Onboarding Call"
+        headline="Book your adult onboarding call"
+        description="Start with a 15-minute phone call with Sam. You will answer a few quick questions, pick a time, and we will walk you through next steps — including your starting point session and 30-day Jumpstart."
       />
-      <div className="mb-10">
-        <Link
-          href={ONBOARDING_PATHS.adultIntake}
-          className={buttonLinkClass("default", "lg")}
-        >
-          Schedule your free consultation
-        </Link>
-      </div>
-      <h3 className="font-heading text-2xl">What the adult program looks like</h3>
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
-        {programPoints.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-      <h3 className="mt-12 font-heading text-2xl">Onboarding process</h3>
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
-        {onboarding.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </Section>
+    </>
   );
 }

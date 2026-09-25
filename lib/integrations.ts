@@ -12,3 +12,9 @@ export const ONBOARDING_PATHS = {
   adultIntake: "/adults-intake-1",
   athleteIntake: "/athletes-intake",
 } as const;
+
+/** In-page scheduler anchors on program marketing pages */
+export const ONBOARDING_SECTION_IDS = {
+  adult: "book-adult-onboarding",
+  athlete: "book-athlete-onboarding",
+} as const;

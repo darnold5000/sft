@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useId } from "react";
 import { buttonLinkClass } from "@/components/ui/button";
 
 type Props = {
@@ -9,40 +9,30 @@ type Props = {
   title: string;
 };
 
-declare global {
-  interface Window {
-    AcuityScheduling?: {
-      embed: (opts: { url: string; iframe?: string }) => void;
-    };
-  }
+const EMBED_SCRIPT_BASE = "https://embed.acuityscheduling.com/js/embed.js";
+
+/**
+ * Acuity's embed.js only resizes iframes that already load a scheduler URL in `src`.
+ * It does not expose AcuityScheduling.embed() — see developers.acuityscheduling.com.
+ */
+function loadAcuityEmbedScript() {
+  const script = document.createElement("script");
+  script.src = `${EMBED_SCRIPT_BASE}?_${Date.now()}`;
+  script.async = true;
+  document.body.appendChild(script);
 }
 
 export function AcuityEmbed({ scheduleUrl, title }: Props) {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const reactId = useId().replace(/:/g, "");
+  const iframeId = `acuity-iframe-${reactId}`;
 
   useEffect(() => {
-    if (!scheduleUrl || !iframeRef.current) return;
+    if (!scheduleUrl) return;
 
-    const scriptId = "acuity-embed-script";
-    const existing = document.getElementById(scriptId);
-    const run = () => {
-      window.AcuityScheduling?.embed({
-        url: scheduleUrl,
-        iframe: iframeRef.current?.id,
-      });
-    };
-
-    if (existing) {
-      run();
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.id = scriptId;
-    script.src = "https://embed.acuityscheduling.com/js/embed.js";
-    script.async = true;
-    script.onload = run;
-    document.body.appendChild(script);
+    const frame = requestAnimationFrame(() => {
+      loadAcuityEmbedScript();
+    });
+    return () => cancelAnimationFrame(frame);
   }, [scheduleUrl]);
 
   if (!scheduleUrl) {
@@ -53,8 +43,7 @@ export function AcuityEmbed({ scheduleUrl, title }: Props) {
           <code className="rounded bg-muted px-1">NEXT_PUBLIC_ACUITY_ADULT_URL</code>{" "}
           or{" "}
           <code className="rounded bg-muted px-1">NEXT_PUBLIC_ACUITY_ATHLETE_URL</code>{" "}
-          in <code className="rounded bg-muted px-1">.env.local</code>. Squarespace
-          loads these URLs dynamically, so they are not available from static HTML.
+          in <code className="rounded bg-muted px-1">.env.local</code> or Vercel.
         </p>
         <Link href="/contact-us" className={buttonLinkClass("secondary")}>
           Contact us for help scheduling
@@ -66,12 +55,13 @@ export function AcuityEmbed({ scheduleUrl, title }: Props) {
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
       <iframe
-        ref={iframeRef}
-        id={`acuity-${title.replace(/\s+/g, "-").toLowerCase()}`}
+        key={scheduleUrl}
+        id={iframeId}
+        src={scheduleUrl}
         title={title}
         width="100%"
         height={800}
-        className="min-h-[min(800px,80vh)] w-full border-0"
+        className="min-h-[min(800px,80vh)] w-full border-0 bg-white"
         allow="payment"
       />
     </div>
