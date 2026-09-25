@@ -7,6 +7,8 @@ import { buttonLinkClass } from "@/components/ui/button";
 type Props = {
   scheduleUrl: string;
   title: string;
+  /** Slightly shorter default height for program pages above the fold */
+  compact?: boolean;
 };
 
 const EMBED_SCRIPT_BASE = "https://embed.acuityscheduling.com/js/embed.js";
@@ -22,7 +24,7 @@ function loadAcuityEmbedScript() {
   document.body.appendChild(script);
 }
 
-export function AcuityEmbed({ scheduleUrl, title }: Props) {
+export function AcuityEmbed({ scheduleUrl, title, compact = false }: Props) {
   const reactId = useId().replace(/:/g, "");
   const iframeId = `acuity-iframe-${reactId}`;
 
@@ -60,8 +62,12 @@ export function AcuityEmbed({ scheduleUrl, title }: Props) {
         src={scheduleUrl}
         title={title}
         width="100%"
-        height={800}
-        className="min-h-[min(800px,80vh)] w-full border-0 bg-white"
+        height={compact ? 720 : 800}
+        className={
+          compact
+            ? "min-h-[min(720px,72vh)] w-full border-0 bg-white"
+            : "min-h-[min(800px,80vh)] w-full border-0 bg-white"
+        }
         allow="payment"
       />
     </div>

@@ -40,9 +40,16 @@ export const SQUARESPACE_STORE_URL =
   process.env.NEXT_PUBLIC_SQUARESPACE_STORE_URL?.trim() ||
   "https://sft-training.com/store";
 
+export const PROGRAM_ROUTES = {
+  adult: "/adults",
+  athlete: "/athletes",
+} as const;
+
+/** Nav paths that highlight the Programs item */
+export const PROGRAM_NAV_PREFIXES = ["/adults", "/athletes"] as const;
+
 export const NAV_LINKS = [
-  { href: "/adults", label: "Adult Training" },
-  { href: "/athletes", label: "Athlete Performance" },
+  { href: PROGRAM_ROUTES.adult, label: "Programs" },
   { href: "/about-me", label: "About" },
   { href: "/testimonials", label: "Results" },
   { href: "/blog", label: "Blog" },

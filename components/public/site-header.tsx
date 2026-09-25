@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 import { buttonLinkClass } from "@/components/ui/button";
 import { ACUITY } from "@/lib/integrations";
 import { SFT_IMAGES } from "@/lib/assets";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { NAV_LINKS, PROGRAM_NAV_PREFIXES, PROGRAM_ROUTES, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 function MemberLoginNavLink({
@@ -68,8 +68,12 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {NAV_LINKS.map((link) => {
             const active =
-              pathname === link.href ||
-              pathname.startsWith(`${link.href}/`);
+              link.label === "Programs"
+                ? PROGRAM_NAV_PREFIXES.some(
+                    (p) => pathname === p || pathname.startsWith(`${p}/`),
+                  )
+                : pathname === link.href ||
+                  pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
@@ -110,14 +114,33 @@ export function SiteHeader() {
         <div className="border-t border-border bg-ink px-4 py-4 lg:hidden">
           <nav className="flex flex-col gap-1" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-md px-3 py-3 text-base font-semibold text-white"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
+              <div key={link.href}>
+                <Link
+                  href={link.href}
+                  className="block rounded-md px-3 py-3 text-base font-semibold text-white"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+                {link.label === "Programs" ? (
+                  <div className="mb-2 flex gap-3 px-6">
+                    <Link
+                      href={PROGRAM_ROUTES.adult}
+                      className="text-sm font-semibold text-muted-foreground hover:text-white"
+                      onClick={() => setOpen(false)}
+                    >
+                      Adults
+                    </Link>
+                    <Link
+                      href={PROGRAM_ROUTES.athlete}
+                      className="text-sm font-semibold text-muted-foreground hover:text-white"
+                      onClick={() => setOpen(false)}
+                    >
+                      Athletes
+                    </Link>
+                  </div>
+                ) : null}
+              </div>
             ))}
             <Link
               href="/get-started"
