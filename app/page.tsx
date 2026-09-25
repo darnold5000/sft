@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { buttonLinkClass } from "@/components/ui/button";
+import { BackgroundWord } from "@/components/public/background-word";
+import { CoachSpotlight } from "@/components/public/coach-spotlight";
+import { CtaLink } from "@/components/public/cta-link";
+import { EditorialQuote } from "@/components/public/editorial-quote";
+import { Eyebrow } from "@/components/public/eyebrow";
+import { ProgramPanel } from "@/components/public/program-panel";
 import { Section, SectionHeading } from "@/components/public/section";
-import { PlaceholderImage } from "@/components/public/placeholder-image";
 import { SFT_IMAGES } from "@/lib/assets";
 import { getAllBlogPosts } from "@/lib/blog/parse-rss";
 import { getAllTestimonials } from "@/lib/testimonials";
@@ -19,245 +23,350 @@ export const metadata = createMetadata({
   exactTitle: true,
 });
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export default function HomePage() {
-  const posts = getAllBlogPosts().slice(0, 3);
-  const featured = getAllTestimonials().slice(0, 3);
+  const posts = getAllBlogPosts();
+  const latest = posts[0];
+  const morePosts = posts.slice(1, 3);
+  const testimonials = getAllTestimonials();
+  const featuredQuote = testimonials.find((t) => t.id === "martha-metzger") ?? testimonials[0];
+  const secondaryQuotes = testimonials
+    .filter((t) => t.id !== featuredQuote.id)
+    .slice(0, 2);
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border bg-ink">
-        <div className="absolute inset-0 opacity-40">
+      <section className="relative min-h-[min(92vh,52rem)] overflow-hidden border-b border-border/60 bg-ink">
+        <div className="absolute inset-0">
           <Image
             src={SFT_IMAGES.facility}
             alt=""
             fill
-            className="object-cover"
+            className="object-cover object-center scale-105 motion-safe:transition-transform motion-safe:duration-[1.2s] hover:scale-100"
             priority
             sizes="100vw"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/50" />
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 py-20 sm:px-6 lg:py-28">
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/25"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/50 to-transparent"
+          aria-hidden
+        />
+        <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40 lg:min-h-[min(92vh,52rem)]">
+          <Eyebrow className="motion-reveal text-accent">
             Crown Point, Indiana · Northwest Indiana
-          </p>
-          <h1 className="max-w-3xl font-heading text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
-            Individualized training for adults &amp; athletes
+          </Eyebrow>
+          <h1
+            className="motion-reveal mt-4 max-w-4xl font-display text-[clamp(2.75rem,7vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
+            style={{ animationDelay: "80ms" }}
+          >
+            Individualized training for{" "}
+            <span className="text-brand">adults</span> &amp;{" "}
+            <span className="text-accent">athletes</span>
           </h1>
-          <p className="max-w-2xl text-lg text-white/80">
-            Strength For Today is a semi-private training gym. Every client gets
-            an individualized program in a supportive coaching environment — from
-            first-time gym-goers to competitive athletes.
+          <p
+            className="motion-reveal mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl"
+            style={{ animationDelay: "140ms" }}
+          >
+            Semi-private coaching with programs built for you — from first-time
+            gym-goers to competitive athletes.
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link href="/adults" className={buttonLinkClass("default", "lg")}>
+          <div
+            className="motion-reveal mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            style={{ animationDelay: "200ms" }}
+          >
+            <CtaLink href="/adults" variant="default" size="lg">
               Adult Training
-            </Link>
-            <Link href="/athletes" className={buttonLinkClass("accent", "lg")}>
+            </CtaLink>
+            <CtaLink href="/athletes" variant="accent" size="lg">
               Athlete Performance
-            </Link>
-            <Link href="/get-started" className={buttonLinkClass("secondary", "lg")}>
+            </CtaLink>
+            <CtaLink href="/get-started" variant="secondary" size="lg">
               Get Started
-            </Link>
+            </CtaLink>
           </div>
         </div>
       </section>
 
-      <Section>
-        <SectionHeading
-          title="Choose your path"
-          subtitle="Two programs, one standard of coaching — meet you where you are and build a plan for where you want to go."
-          align="center"
-        />
-        <div className="grid gap-6 md:grid-cols-2">
-          <article className="rounded-2xl border border-border bg-card p-8">
-            <h3 className="font-heading text-2xl text-foreground">Adult Training</h3>
-            <p className="mt-3 text-muted-foreground">
-              Semi-private, personalized training with individualized programming
-              every session — move better, feel better, and build consistency.
-            </p>
-            <Link
-              href="/adults"
-              className={cn(buttonLinkClass("secondary"), "mt-6 inline-flex")}
-            >
-              Explore Adult Training
-            </Link>
-          </article>
-          <article className="rounded-2xl border border-border bg-card p-8">
-            <h3 className="font-heading text-2xl text-foreground">Athlete Performance</h3>
-            <p className="mt-3 text-muted-foreground">
-              Youth (grades 5–8) and high school athletes — speed, agility,
-              strength, and testing with hands-on coaching.
-            </p>
-            <Link
-              href="/athletes"
-              className={cn(buttonLinkClass("secondary"), "mt-6 inline-flex")}
-            >
-              Explore Athlete Performance
-            </Link>
-          </article>
+      <Section className="border-b border-border/40 bg-background">
+        <div className="mb-12 max-w-3xl">
+          <Eyebrow tone="brand">Programs</Eyebrow>
+          <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight sm:text-5xl">
+            Two paths. One standard of coaching.
+          </h2>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
+          <ProgramPanel
+            variant="adult"
+            eyebrow="Adults"
+            title="Adult Training"
+            description="Personalized semi-private training — move better, feel better, and build consistency with programming every session."
+            href="/adults"
+            cta="Explore adult training"
+          />
+          <ProgramPanel
+            variant="athlete"
+            eyebrow="Athletes"
+            title="Athlete Performance"
+            description="Youth and high school athletes — speed, agility, strength, and hands-on coaching built around sport and goals."
+            href="/athletes"
+            cta="Explore athlete performance"
+          />
         </div>
       </Section>
 
-      <Section className="bg-card/40">
-        <SectionHeading
-          title="Why Strength For Today"
-          subtitle="We specialize in semi-private personal training for adults, high school athletes, and youth athletes across greater Northwest Indiana."
-        />
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="space-y-4 text-muted-foreground">
-            <p>
-              <strong className="text-foreground">Who we are.</strong> We create
-              individualized programs for everyone who steps through our door —
-              not one-size-fits-all group workouts.
-            </p>
-            <p>
-              <strong className="text-foreground">Our mission.</strong> Meet each
-              client where they are, guide their fitness journey, and empower them
-              to build a healthier, stronger, more fulfilling future.
-            </p>
-            <p>
-              <strong className="text-foreground">How to start.</strong> Adults
-              and athletes follow a thorough onboarding process — questionnaire
-              or intake, a conversation with Sam, then your starting point session
-              or assessment.
+      <Section className="relative overflow-hidden bg-ink surface-noise">
+        <BackgroundWord className="left-0 top-8 -translate-x-[5%]">
+          Strength
+        </BackgroundWord>
+        <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <Eyebrow>Why SFT</Eyebrow>
+            <p className="mt-6 font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
+              Semi-private training for adults, high school athletes, and youth
+              across greater Northwest Indiana.
             </p>
           </div>
-          <div className="relative min-h-[280px] overflow-hidden rounded-2xl">
-            <PlaceholderImage
-              src={SFT_IMAGES.facility}
-              alt="Strength For Today training floor"
-              fill
-              className="absolute inset-0"
-            />
+          <div className="space-y-10 lg:col-span-7 lg:pt-4">
+            <div>
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+                Who we are
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                We create individualized programs for everyone who steps through
+                our door — not one-size-fits-all group workouts.
+              </p>
+            </div>
+            <div>
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+                Our mission
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                Meet each client where they are, guide their fitness journey, and
+                empower them to build a healthier, stronger, more fulfilling
+                future.
+              </p>
+            </div>
+            <div>
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
+                How to start
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                Adults and athletes follow a thorough onboarding process —
+                questionnaire or intake, a conversation with Sam, then your
+                starting point session or assessment.
+              </p>
+            </div>
           </div>
         </div>
       </Section>
 
       <Section>
         <SectionHeading title="Meet the coaches" />
-        <div className="grid gap-8 md:grid-cols-2">
-          {TEAM.map((member) => (
-            <article
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-16">
+          {TEAM.map((member, i) => (
+            <CoachSpotlight
               key={member.id}
-              className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row"
-            >
-              <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-xl sm:h-auto sm:w-40">
-                <PlaceholderImage
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="absolute inset-0"
-                />
-              </div>
-              <div>
-                <h3 className="font-heading text-xl">{member.name}</h3>
-                <p className="text-sm font-semibold text-accent">{member.role}</p>
-                <p className="mt-3 text-sm text-muted-foreground line-clamp-5">
-                  {member.bio[0]}
-                </p>
-                <Link
-                  href="/about-me"
-                  className="mt-3 inline-block text-sm font-semibold text-accent hover:underline"
-                >
-                  Read full bio
-                </Link>
-              </div>
-            </article>
+              name={member.name}
+              role={member.role}
+              teaser={member.bio[0]}
+              monogramTone={i === 0 ? "brand" : "accent"}
+            />
           ))}
         </div>
       </Section>
 
-      <Section className="bg-card/30">
+      <Section className="border-y border-border/50 bg-gradient-to-b from-card/30 to-background">
         <SectionHeading
           title="Results"
           subtitle="Parents and clients share how individualized coaching shows up in strength, speed, confidence, and everyday life."
         />
-        <div className="grid gap-6 md:grid-cols-3">
-          {featured.map((t) => (
-            <blockquote
-              key={t.id}
-              className="rounded-2xl border border-border bg-card p-6"
-            >
-              <p className="text-sm leading-relaxed text-foreground/90">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <footer className="mt-4 text-sm font-semibold text-accent">
-                {t.name}
-                <span className="block font-normal text-muted-foreground">
-                  {t.role}
-                </span>
-              </footer>
-            </blockquote>
-          ))}
+        <div className="grid gap-8 lg:grid-cols-2">
+          <EditorialQuote
+            featured
+            quote={featuredQuote.quote}
+            name={featuredQuote.name}
+            role={featuredQuote.role}
+            context={featuredQuote.context}
+          />
+          <div className="flex flex-col gap-8">
+            {secondaryQuotes.map((t) => (
+              <EditorialQuote
+                key={t.id}
+                quote={t.quote}
+                name={t.name}
+                role={t.role}
+                context={t.context}
+              />
+            ))}
+          </div>
         </div>
-        <div className="mt-8 text-center">
-          <Link href="/testimonials" className={buttonLinkClass("secondary")}>
+        <div className="mt-12">
+          <CtaLink href="/testimonials" variant="secondary">
             Read more results
-          </Link>
+          </CtaLink>
         </div>
       </Section>
 
       <Section>
-        <SectionHeading
-          title="From the blog"
-          subtitle="Training, nutrition, and mindset from the SFT team."
-        />
-        <div className="grid gap-6 md:grid-cols-3">
-          {posts.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group rounded-2xl border border-border bg-card p-6 transition hover:border-brand/40"
-            >
-              <p className="text-xs text-muted-foreground">{post.author}</p>
-              <h3 className="mt-2 font-heading text-lg group-hover:text-accent">
-                {post.title}
-              </h3>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-8">
-          <Link href="/blog" className={buttonLinkClass("ghost")}>
-            View all posts
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Eyebrow>From the blog</Eyebrow>
+            <h2 className="mt-2 font-display text-4xl font-semibold uppercase tracking-tight sm:text-5xl">
+              Training &amp; mindset
+            </h2>
+          </div>
+          <Link
+            href="/blog"
+            className="text-sm font-semibold uppercase tracking-wider text-accent hover:text-white"
+          >
+            View all posts →
           </Link>
         </div>
+
+        {latest ? (
+          <div className="grid gap-8 lg:grid-cols-12">
+            <Link
+              href={`/blog/${latest.slug}`}
+              className="group relative block overflow-hidden bg-brand/10 lg:col-span-7 lg:min-h-[18rem]"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-brand/25 via-card to-ink"
+                aria-hidden
+              />
+              {latest.image ? (
+                <Image
+                  src={latest.image}
+                  alt=""
+                  fill
+                  className="object-cover opacity-40 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-50"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
+              ) : null}
+              <div className="relative flex h-full flex-col justify-end p-8 sm:p-10">
+                <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+                  Latest · {latest.author}
+                </p>
+                <h3 className="mt-3 font-display text-3xl font-semibold uppercase leading-tight text-white transition group-hover:text-accent sm:text-4xl">
+                  {latest.title}
+                </h3>
+                <p className="mt-3 line-clamp-2 text-sm text-white/75">
+                  {stripHtml(latest.bodyHtml).slice(0, 160)}…
+                </p>
+              </div>
+            </Link>
+            <div className="flex flex-col gap-6 lg:col-span-5">
+              {morePosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group border-l-2 border-border pl-6 transition hover:border-accent"
+                >
+                  <p className="text-xs text-muted-foreground">
+                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}{" "}
+                    · {post.author}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl font-semibold uppercase leading-snug text-white group-hover:text-accent">
+                    {post.title}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </Section>
 
-      <Section className="border-t border-border bg-ink">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-border bg-card p-8 md:flex-row md:items-center">
-          <div>
-            <h2 className="font-heading text-2xl">Official SFT merchandise</h2>
-            <p className="mt-2 max-w-xl text-muted-foreground">
-              Apparel, hats, drinkware, and more — available through our current
-              Squarespace store while we finalize the production commerce setup.
+      <section className="relative overflow-hidden border-y border-border/60 bg-ink py-16 sm:py-20">
+        <div
+          className="absolute right-0 top-1/2 size-64 -translate-y-1/2 opacity-[0.06] sm:size-96"
+          aria-hidden
+        >
+          <Image
+            src={SFT_IMAGES.logoPrimary}
+            alt=""
+            fill
+            className="object-contain"
+            sizes="384px"
+          />
+        </div>
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="max-w-xl">
+            <Eyebrow tone="accent">Merch</Eyebrow>
+            <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
+              Official SFT gear
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Apparel, hats, drinkware, and more — rep Strength For Today on and
+              off the floor.
             </p>
           </div>
-          <a
+          <CtaLink
             href={SQUARESPACE_STORE_URL}
-            className={buttonLinkClass("accent")}
+            variant="accent"
+            size="lg"
             target="_blank"
-            rel="noreferrer"
           >
-            Visit the store
-          </a>
+            Shop SFT
+          </CtaLink>
+        </div>
+      </section>
+
+      <Section className="relative overflow-hidden bg-brand">
+        <span
+          className="pointer-events-none absolute -right-4 top-1/2 -translate-y-1/2 font-display text-[clamp(5rem,20vw,14rem)] font-bold uppercase leading-none text-outline-ghost"
+          aria-hidden
+        >
+          Start
+        </span>
+        <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
+              Ready when you are
+            </h2>
+            <p className="mt-4 max-w-lg text-white/90">
+              Choose adult training or athlete performance — we will walk you
+              through onboarding step by step.
+            </p>
+          </div>
+          <CtaLink
+            href="/get-started"
+            variant="secondary"
+            size="lg"
+            className="border-white/30 bg-ink text-white hover:bg-ink/90"
+          >
+            Get started
+          </CtaLink>
         </div>
       </Section>
 
-      <Section id="newsletter">
-        <SectionHeading
-          title="Stay in the loop"
-          subtitle="Health tips, recipes, facility updates, and more — join the SFT email list on our current site until the new signup is wired."
-          align="center"
-        />
-        <div className="mx-auto max-w-lg text-center">
+      <Section id="newsletter" className="border-t border-border/40">
+        <div className="mx-auto max-w-2xl text-center">
+          <Eyebrow tone="muted">Newsletter</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight sm:text-4xl">
+            Stay in the loop
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Health tips, recipes, facility updates, and more from the SFT team.
+          </p>
           <a
             href="https://sft-training.com/"
-            className={buttonLinkClass("default")}
+            className={cn(
+              "mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-brand px-6 text-base font-semibold text-brand-foreground transition hover:bg-brand/90",
+            )}
             target="_blank"
             rel="noreferrer"
           >
-            Newsletter signup
+            Join the email list
           </a>
         </div>
       </Section>

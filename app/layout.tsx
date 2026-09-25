@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteFooter } from "@/components/public/site-footer";
 import { SiteHeader } from "@/components/public/site-header";
 import { LocalBusinessJsonLd } from "@/components/public/local-business-json-ld";
+import { fontDisplay, fontSans } from "@/lib/fonts";
 import { createMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
@@ -19,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col antialiased">
+    <html lang="en" className={`${fontDisplay.variable} ${fontSans.variable}`}>
+      <body className="flex min-h-screen flex-col antialiased font-sans">
         <LocalBusinessJsonLd />
         <a
           href="#main-content"
