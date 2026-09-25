@@ -6,6 +6,8 @@ type Props = {
   scheduleTitle: string;
   headline: string;
   description: string;
+  /** Primary = directly under program hero; closing = end of page (unused if only primary) */
+  placement?: "primary" | "closing";
 };
 
 export function ProgramScheduleClosing({
@@ -13,11 +15,18 @@ export function ProgramScheduleClosing({
   scheduleTitle,
   headline,
   description,
+  placement = "primary",
 }: Props) {
+  const isPrimary = placement === "primary";
+
   return (
     <section
       id="book-onboarding"
-      className="scroll-mt-24 border-t border-neutral-800 bg-neutral-950 py-16 sm:py-20"
+      className={
+        isPrimary
+          ? "scroll-mt-24 border-b border-neutral-800 bg-neutral-950 py-12 sm:py-16"
+          : "scroll-mt-24 border-t border-neutral-800 bg-neutral-950 py-16 sm:py-20"
+      }
       aria-labelledby="program-booking-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -31,8 +40,12 @@ export function ProgramScheduleClosing({
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           {description}
         </p>
-        <div className="mt-10">
-          <AcuityEmbed scheduleUrl={scheduleUrl} title={scheduleTitle} />
+        <div className="mt-8">
+          <AcuityEmbed
+            scheduleUrl={scheduleUrl}
+            title={scheduleTitle}
+            compact={isPrimary}
+          />
         </div>
       </div>
     </section>

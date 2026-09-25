@@ -32,6 +32,28 @@ export const SFT_IMAGES = {
     `${CDN}/f879b2bc-be3b-4a32-9290-348b9bf15e77/IMG_4111+2.jpeg`,
 } as const;
 
+/** Product photography from the live SFT store (CDN). */
+export const SFT_MERCH = {
+  heroHoodie:
+    `${CDN}/1759260845557-GFZYCSUA9LFXE1D7M8RT/unisex-heavy-blend-zip-hoodie-black-front-68dc30a60a366.jpg`,
+  apparelSweatshirt:
+    `${CDN}/1759261701653-9TN0LUNE49ZDO5AE1CG2/unisex-garment-dyed-sweatshirt-true-navy-front-68dc33f29b206.jpg`,
+  apparelTee:
+    `${CDN}/1759263119635-SI9HOZQ2QDD3WIAA1PDX/unisex-sports-tee-carolina-blue-front-68dc39718de29.jpg`,
+  apparelJacket:
+    `${CDN}/1759273611889-FQI9MEL5WJ5NYW54HNTE/embroidered-champion-packable-jacket-black-front-68dc627e61abd.jpg`,
+  headwearTrucker:
+    `${CDN}/1759273173706-MJS6IQU0TLTF80P67SM3/retro-trucker-hat-black-front-68dc60caa82f4.jpg`,
+  headwearBeanie:
+    `${CDN}/1759272885618-BGLKWJG7Z7HHYQK2JYLK/cuffed-beanie-black-front-68dc5fb0da76c.jpg`,
+  accessoryMug:
+    `${CDN}/1759261983692-KFJPVOQO92LGCD9PJ5GB/black-glossy-mug-black-11-oz-handle-on-right-68dc35145e84c.jpg`,
+  accessoryTumbler:
+    `${CDN}/1759262099228-L9LV7Q923YP276OBCPJB/insulated-tumbler-with-a-straw-black-20-oz-front-68dc3588752b0.jpg`,
+  accessoryTote:
+    `${CDN}/1759261499864-C24XCZ2FYKQT9926UZU6/large-eco-tote-black-front-68dc33327c30a.jpg`,
+} as const;
+
 /** Request a reasonable width from Squarespace CDN. */
 export function sftImageUrl(
   url: string,

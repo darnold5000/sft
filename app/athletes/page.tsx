@@ -34,6 +34,14 @@ export default function AthletesPage() {
         imageAlt="High school athlete training at Strength For Today"
       />
 
+      <ProgramScheduleClosing
+        placement="primary"
+        scheduleUrl={ACUITY.athleteOnboarding}
+        scheduleTitle="Athlete Program Onboarding Call"
+        headline={ATHLETE_PROGRAM.bookingHeadline}
+        description={ATHLETE_PROGRAM.bookingDescription}
+      />
+
       <Section className="border-b border-neutral-800 bg-background">
         <Eyebrow tone="muted">Programs by age</Eyebrow>
         <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
@@ -121,13 +129,6 @@ export default function AthletesPage() {
           <ProgramStepsList steps={[...ATHLETE_PROGRAM.onboardingSteps]} />
         </div>
       </Section>
-
-      <ProgramScheduleClosing
-        scheduleUrl={ACUITY.athleteOnboarding}
-        scheduleTitle="Athlete Program Onboarding Call"
-        headline={ATHLETE_PROGRAM.bookingHeadline}
-        description={ATHLETE_PROGRAM.bookingDescription}
-      />
     </>
   );
 }

@@ -3,43 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { buttonLinkClass } from "@/components/ui/button";
-import { ACUITY } from "@/lib/integrations";
 import { SFT_IMAGES } from "@/lib/assets";
 import { NAV_LINKS, PROGRAM_NAV_PREFIXES, PROGRAM_ROUTES, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
-
-function MemberLoginNavLink({
-  className,
-  children,
-  onClick,
-}: {
-  className: string;
-  children: ReactNode;
-  onClick?: () => void;
-}) {
-  if (ACUITY.memberLogin) {
-    return (
-      <a
-        href={ACUITY.memberLogin}
-        className={className}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={onClick}
-      >
-        {children}
-      </a>
-    );
-  }
-
-  return (
-    <Link href="/get-started" className={className} onClick={onClick}>
-      {children}
-    </Link>
-  );
-}
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -95,9 +64,9 @@ export function SiteHeader() {
           <Link href="/get-started" className={buttonLinkClass("default", "sm")}>
             Get Started
           </Link>
-          <MemberLoginNavLink className={buttonLinkClass("ghost", "sm")}>
+          <Link href="/member-login" className={buttonLinkClass("ghost", "sm")}>
             Member Login
-          </MemberLoginNavLink>
+          </Link>
         </div>
 
         <button
@@ -149,12 +118,13 @@ export function SiteHeader() {
             >
               Get Started
             </Link>
-            <MemberLoginNavLink
+            <Link
+              href="/member-login"
               className={cn(buttonLinkClass("secondary"), "mt-2")}
               onClick={() => setOpen(false)}
             >
               Member Login / Book Training
-            </MemberLoginNavLink>
+            </Link>
           </nav>
         </div>
       ) : null}

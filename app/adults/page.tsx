@@ -34,6 +34,14 @@ export default function AdultsPage() {
         imageAlt="Adults training at Strength For Today"
       />
 
+      <ProgramScheduleClosing
+        placement="primary"
+        scheduleUrl={ACUITY.adultOnboarding}
+        scheduleTitle="Adult Program Onboarding Call"
+        headline={ADULT_PROGRAM.bookingHeadline}
+        description={ADULT_PROGRAM.bookingDescription}
+      />
+
       <Section className="border-b border-neutral-800 bg-background">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -111,13 +119,6 @@ export default function AdultsPage() {
           <ProgramStepsList steps={[...ADULT_PROGRAM.onboardingSteps]} />
         </div>
       </Section>
-
-      <ProgramScheduleClosing
-        scheduleUrl={ACUITY.adultOnboarding}
-        scheduleTitle="Adult Program Onboarding Call"
-        headline={ADULT_PROGRAM.bookingHeadline}
-        description={ADULT_PROGRAM.bookingDescription}
-      />
     </>
   );
 }

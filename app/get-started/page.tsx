@@ -39,7 +39,7 @@ export default function GetStartedPage() {
             href={PROGRAM_ROUTES.adult}
             className={buttonLinkClass("default") + " mt-8 inline-flex"}
           >
-            Explore adult training
+            Explore Adult Training
           </Link>
         </article>
         <article className="flex flex-col rounded-2xl border border-border bg-card p-8 sm:p-10">
@@ -54,7 +54,7 @@ export default function GetStartedPage() {
             href={PROGRAM_ROUTES.athlete}
             className={buttonLinkClass("outline") + " mt-8 inline-flex"}
           >
-            Explore athlete performance
+            Explore Athlete Performance
           </Link>
         </article>
       </div>

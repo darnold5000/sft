@@ -6,6 +6,10 @@ export const ACUITY = {
     process.env.NEXT_PUBLIC_ACUITY_ATHLETE_URL?.trim() || "",
   memberLogin:
     process.env.NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL?.trim() || "",
+  /** Main business scheduler (all appointment types + client Login control) */
+  memberSchedulerEmbed:
+    process.env.NEXT_PUBLIC_ACUITY_MEMBER_SCHEDULER_EMBED_URL?.trim() ||
+    "https://app.acuityscheduling.com/schedule/e4690836",
 } as const;
 
 export const ONBOARDING_PATHS = {

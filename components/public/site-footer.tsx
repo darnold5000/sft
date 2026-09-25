@@ -108,14 +108,14 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
           <p className="text-white/70">
-            Shop merchandise on our{" "}
+            Shop official SFT gear on our{" "}
             <a
               href={SQUARESPACE_STORE_URL}
               className="text-neutral-300 underline-offset-2 hover:text-white hover:underline"
               target="_blank"
               rel="noreferrer"
             >
-              Squarespace store
+              online store
             </a>
             .
           </p>
