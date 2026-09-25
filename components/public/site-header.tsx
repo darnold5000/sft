@@ -39,10 +39,8 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
           {NAV_LINKS.map((link) => {
             const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname === link.href ||
-                  pathname.startsWith(`${link.href}/`);
+              pathname === link.href ||
+              pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
