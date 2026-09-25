@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { SiteFooter } from "@/components/public/site-footer";
 import { SiteHeader } from "@/components/public/site-header";
 import { LocalBusinessJsonLd } from "@/components/public/local-business-json-ld";
@@ -40,6 +41,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main-content" className="flex-1">{children}</main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );
