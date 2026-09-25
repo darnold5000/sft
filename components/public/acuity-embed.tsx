@@ -70,13 +70,15 @@ export function AcuityEmbed({
   }
 
   const iframeClass = isProgram
-    ? "min-h-[min(520px,58vh)] w-full min-w-0 border-0 bg-white lg:min-h-[min(540px,62vh)]"
+    ? "min-h-[min(480px,52vh)] w-full max-w-full border-0 bg-white xl:min-h-[560px]"
     : isCompact
       ? "min-h-[min(640px,68vh)] w-full max-w-full border-0 bg-white"
       : "min-h-[min(800px,80vh)] w-full max-w-full border-0 bg-white";
 
   const wrapperClass = bare
-    ? "max-w-full overflow-hidden"
+    ? isProgram
+      ? "w-full max-w-full overflow-hidden"
+      : "max-w-full overflow-hidden"
     : "overflow-hidden rounded-xl border border-border bg-card";
 
   return (
@@ -87,7 +89,7 @@ export function AcuityEmbed({
         src={scheduleUrl}
         title={title}
         width="100%"
-        height={isProgram ? 540 : isCompact ? 640 : 800}
+        height={isProgram ? 560 : isCompact ? 640 : 800}
         className={iframeClass}
         allow="payment"
       />
