@@ -46,17 +46,21 @@ export default function HomePage() {
             src={sftImageUrl(SFT_IMAGES.trainingHero, 2500)}
             alt=""
             fill
-            className="object-cover object-center"
+            className="object-cover object-[62%_center] brightness-[1.12] contrast-[1.06] sm:object-[58%_center]"
             priority
             sizes="100vw"
           />
         </div>
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/35"
+          className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/15 sm:via-black/38 sm:to-black/10"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-black/5 sm:via-black/32"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-y-0 left-0 w-full max-w-2xl bg-gradient-to-r from-black/75 to-transparent sm:max-w-3xl"
           aria-hidden
         />
         <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40 lg:min-h-[min(92vh,52rem)]">

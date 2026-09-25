@@ -9,6 +9,8 @@ type Props = {
   title: string;
   /** Slightly shorter default height for program pages above the fold */
   compact?: boolean;
+  /** No outer card border — iframe only (program booking column) */
+  bare?: boolean;
 };
 
 const EMBED_SCRIPT_BASE = "https://embed.acuityscheduling.com/js/embed.js";
@@ -24,7 +26,12 @@ function loadAcuityEmbedScript() {
   document.body.appendChild(script);
 }
 
-export function AcuityEmbed({ scheduleUrl, title, compact = false }: Props) {
+export function AcuityEmbed({
+  scheduleUrl,
+  title,
+  compact = false,
+  bare = false,
+}: Props) {
   const reactId = useId().replace(/:/g, "");
   const iframeId = `acuity-iframe-${reactId}`;
 
@@ -54,20 +61,24 @@ export function AcuityEmbed({ scheduleUrl, title, compact = false }: Props) {
     );
   }
 
+  const iframeClass = compact
+    ? "min-h-[min(640px,68vh)] w-full max-w-full border-0 bg-white"
+    : "min-h-[min(800px,80vh)] w-full max-w-full border-0 bg-white";
+
+  const wrapperClass = bare
+    ? "max-w-full overflow-hidden"
+    : "overflow-hidden rounded-xl border border-border bg-card";
+
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
+    <div className={wrapperClass}>
       <iframe
         key={scheduleUrl}
         id={iframeId}
         src={scheduleUrl}
         title={title}
         width="100%"
-        height={compact ? 720 : 800}
-        className={
-          compact
-            ? "min-h-[min(720px,72vh)] w-full border-0 bg-white"
-            : "min-h-[min(800px,80vh)] w-full border-0 bg-white"
-        }
+        height={compact ? 640 : 800}
+        className={iframeClass}
         allow="payment"
       />
     </div>

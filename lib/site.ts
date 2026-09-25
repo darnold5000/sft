@@ -52,6 +52,7 @@ export const PROGRAM_ROUTES = {
 export const PROGRAM_NAV_PREFIXES = ["/adults", "/athletes"] as const;
 
 export const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: PROGRAM_ROUTES.adult, label: "Programs" },
   { href: "/about-me", label: "About" },
   { href: "/testimonials", label: "Results" },

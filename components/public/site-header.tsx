@@ -33,21 +33,23 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-0.5 lg:flex xl:gap-1" aria-label="Main">
           {NAV_LINKS.map((link) => {
             const active =
-              link.label === "Programs"
-                ? PROGRAM_NAV_PREFIXES.some(
-                    (p) => pathname === p || pathname.startsWith(`${p}/`),
-                  )
-                : pathname === link.href ||
-                  pathname.startsWith(`${link.href}/`);
+              link.label === "Home"
+                ? pathname === "/"
+                : link.label === "Programs"
+                  ? PROGRAM_NAV_PREFIXES.some(
+                      (p) => pathname === p || pathname.startsWith(`${p}/`),
+                    )
+                  : pathname === link.href ||
+                    pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
+                  "relative rounded-md px-2 py-2 text-xs font-semibold uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 xl:px-2.5 xl:text-sm",
                   active
                     ? "text-white after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-white"
                     : "text-foreground-soft/70 hover:text-foreground-soft",
