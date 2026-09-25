@@ -67,5 +67,7 @@ foreach ($line in $lines) {
 }
 
 # Post-process: attach context lines after each item by re-walking (simplified export)
-$items | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $out
+$json = $items | ConvertTo-Json -Depth 5
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($out, $json, $utf8NoBom)
 Write-Host "Parsed $($items.Count) testimonials -> $out"

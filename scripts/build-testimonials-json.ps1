@@ -93,5 +93,7 @@ if ($kevin.Success -and -not $ids["kevin-botma"]) {
   $items = @($items[0..($idx - 1)] + $kevinItem + $items[$idx..($items.Count - 1)])
 }
 
-$items | ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 $outPath
+$json = $items | ConvertTo-Json -Depth 5
+$utf8NoBom = New-Object System.Text.UTF8Encoding $false
+[System.IO.File]::WriteAllText($outPath, $json, $utf8NoBom)
 Write-Host "Wrote $($items.Count) testimonials to $outPath"

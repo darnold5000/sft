@@ -16,7 +16,8 @@ export function getAllTestimonials(): Testimonial[] {
 
   const jsonPath = path.join(process.cwd(), "content/testimonials/data.json");
   if (fs.existsSync(jsonPath)) {
-    const parsed = JSON.parse(fs.readFileSync(jsonPath, "utf8")) as Testimonial[];
+    const raw = fs.readFileSync(jsonPath, "utf8").replace(/^\uFEFF/, "");
+    const parsed = JSON.parse(raw) as Testimonial[];
     cached = parsed.map((t) => ({
       ...t,
       context: t.context ?? undefined,
