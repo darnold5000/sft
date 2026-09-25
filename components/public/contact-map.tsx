@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 type Props = {
   className?: string;
-  /** Desktop: match form height; mobile: shorter */
-  variant?: "default" | "compact";
+  size?: "default" | "featured";
 };
 
-export function ContactMap({ className, variant = "default" }: Props) {
+export function ContactMap({ className, size = "default" }: Props) {
   const heightClass =
-    variant === "compact"
-      ? "h-[min(280px,42vh)] lg:h-full lg:min-h-[22rem]"
+    size === "featured"
+      ? "h-[min(280px,42vh)] lg:min-h-[min(520px,58vh)]"
       : "h-[min(280px,42vh)] lg:min-h-[22rem]";
 
   return (
@@ -25,7 +25,10 @@ export function ContactMap({ className, variant = "default" }: Props) {
         <span aria-hidden> →</span>
       </Link>
       <div
-        className={`overflow-hidden border border-neutral-800 bg-neutral-950 ${heightClass}`}
+        className={cn(
+          "overflow-hidden border border-neutral-800 bg-neutral-950",
+          heightClass,
+        )}
       >
         <iframe
           title="Strength For Today Training on Google Maps"
