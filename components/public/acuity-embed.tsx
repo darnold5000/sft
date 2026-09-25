@@ -70,14 +70,14 @@ export function AcuityEmbed({
   }
 
   const iframeClass = isProgram
-    ? "min-h-[min(480px,52vh)] w-full max-w-full border-0 bg-white xl:min-h-[560px]"
+    ? "min-h-[min(480px,52vh)] w-full border-0 bg-white xl:min-h-[560px] xl:w-[800px] xl:max-w-[800px]"
     : isCompact
       ? "min-h-[min(640px,68vh)] w-full max-w-full border-0 bg-white"
       : "min-h-[min(800px,80vh)] w-full max-w-full border-0 bg-white";
 
   const wrapperClass = bare
     ? isProgram
-      ? "w-full max-w-full overflow-hidden"
+      ? "w-full overflow-hidden xl:w-[800px] xl:max-w-[800px] xl:shrink-0"
       : "max-w-full overflow-hidden"
     : "overflow-hidden rounded-xl border border-border bg-card";
 
