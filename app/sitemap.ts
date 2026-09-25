@@ -10,7 +10,6 @@ const staticPaths = [
   "/testimonials",
   "/blog",
   "/store",
-  "/member-login",
   "/contact-us",
   "/get-directions",
   "/get-started",

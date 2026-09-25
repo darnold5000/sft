@@ -4,14 +4,18 @@ import { Eyebrow } from "@/components/public/eyebrow";
 import { Section } from "@/components/public/section";
 import { ACUITY } from "@/lib/integrations";
 import { createMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 
-export const metadata = createMetadata({
-  title: "Member Login",
-  description:
-    "Existing Strength For Today clients — sign in to book training and manage appointments.",
-  path: "/member-login",
-});
+export const metadata: Metadata = {
+  ...createMetadata({
+    title: "Member Login",
+    description:
+      "Existing Strength For Today clients — sign in to book training and manage appointments.",
+    path: "/member-login",
+  }),
+  robots: { index: false, follow: false },
+};
 
 export default function MemberLoginPage() {
   return (
