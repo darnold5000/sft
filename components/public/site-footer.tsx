@@ -8,17 +8,14 @@ export function SiteFooter() {
     <footer className="mt-auto border-t border-border bg-ink text-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
-          <div className="mb-4 flex items-center gap-2.5">
+          <div className="mb-4">
             <Image
               src={SFT_IMAGES.logoHeader}
-              alt=""
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-md object-cover"
+              alt="Strength For Today"
+              width={240}
+              height={64}
+              className="h-10 w-auto max-w-[220px] object-contain object-left"
             />
-            <span className="font-display text-xl font-semibold uppercase tracking-wide text-white">
-              {SITE.shortName}
-            </span>
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
             Semi-private personal training for adults and athletes in Crown Point,

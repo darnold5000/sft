@@ -57,12 +57,12 @@ const labelClass =
 
 function fieldClass(hasError: boolean) {
   return cn(
-    "w-full rounded-sm border bg-neutral-950/80 px-3 py-2.5 text-sm text-neutral-100 transition",
-    "placeholder:text-neutral-600",
-    "hover:border-neutral-600",
-    "focus:border-neutral-400 focus:outline-none focus:ring-1 focus:ring-white/10",
+    "w-full rounded-sm border bg-[#181818] px-3 py-2.5 text-sm text-[#f2f2f2] transition",
+    "placeholder:text-neutral-500",
+    "hover:border-[#4a4a4a]",
+    "focus:border-[#c4c4c4] focus:outline-none focus:ring-0",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    hasError ? "border-neutral-500" : "border-neutral-800",
+    hasError ? "border-neutral-400" : "border-[#3a3a3a]",
   );
 }
 

@@ -38,7 +38,7 @@ export default function ContactPage() {
         <div className="min-w-0 lg:pt-0">
           <ContactMap size="featured" />
 
-          <div className="mt-8 border-t border-neutral-800 pt-8">
+          <div className="mt-5 border-t border-neutral-800 pt-5 lg:mt-6 lg:pt-6">
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-white">
               {SITE.name}
             </p>

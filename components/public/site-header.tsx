@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { buttonLinkClass } from "@/components/ui/button";
 import { SFT_IMAGES } from "@/lib/assets";
-import { NAV_LINKS, PROGRAM_NAV_PREFIXES, PROGRAM_ROUTES, SITE } from "@/lib/site";
+import { NAV_LINKS, PROGRAM_NAV_PREFIXES, PROGRAM_ROUTES } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
@@ -19,19 +19,18 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link
           href="/"
-          className="flex min-w-0 items-center gap-2"
+          className="flex shrink-0 items-center py-1"
+          aria-label="Strength For Today — home"
           onClick={() => setOpen(false)}
         >
           <Image
             src={SFT_IMAGES.logoHeader}
-            alt=""
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-md object-cover"
+            alt="Strength For Today"
+            width={280}
+            height={72}
+            priority
+            className="h-11 w-auto max-w-[min(280px,52vw)] object-contain object-left sm:h-12"
           />
-          <span className="truncate font-display text-lg font-semibold uppercase tracking-wide text-foreground-soft">
-            {SITE.shortName}
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">

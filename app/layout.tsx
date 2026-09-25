@@ -8,7 +8,7 @@ import { SITE } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = createMetadata({
-  title: SITE.name,
+  title: SITE.shortName,
   description: SITE.description,
   path: "/",
   exactTitle: true,
