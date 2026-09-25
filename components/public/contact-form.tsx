@@ -263,7 +263,7 @@ export function ContactForm() {
         disabled={submitting}
         className={cn(
           buttonLinkClass("default", "default"),
-          "group mt-2 w-full font-display uppercase tracking-wider sm:w-auto",
+          "group mt-2 w-full font-display uppercase tracking-wider focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80 sm:w-auto",
         )}
       >
         {submitting ? "Sending…" : "Send message"}

@@ -12,9 +12,9 @@ export function SiteFooter() {
             <Image
               src={SFT_IMAGES.logoHeader}
               alt="Strength For Today"
-              width={240}
-              height={64}
-              className="h-10 w-auto max-w-[220px] object-contain object-left"
+              width={280}
+              height={72}
+              className="h-12 w-auto max-w-[260px] object-contain object-left mix-blend-lighten"
             />
           </div>
           <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">

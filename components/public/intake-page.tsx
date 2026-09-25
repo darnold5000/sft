@@ -34,7 +34,10 @@ export function IntakePage({
       <AcuityEmbed scheduleUrl={scheduleUrl} title={scheduleTitle} />
       <p className="mt-8 text-sm text-muted-foreground">
         Questions?{" "}
-        <Link href="/contact-us" className="text-accent hover:underline">
+        <Link
+          href="/contact-us"
+          className="text-neutral-200 underline-offset-2 hover:text-white hover:underline"
+        >
           Contact us
         </Link>
         .

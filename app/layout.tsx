@@ -7,12 +7,20 @@ import { createMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-export const metadata: Metadata = createMetadata({
+const siteMetadata = createMetadata({
   title: SITE.shortName,
   description: SITE.description,
   path: "/",
   exactTitle: true,
 });
+
+export const metadata: Metadata = {
+  ...siteMetadata,
+  icons: {
+    icon: [{ url: "/icon", type: "image/png", sizes: "32x32" }],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+  },
+};
 
 export default function RootLayout({
   children,
@@ -21,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${fontDisplay.variable} ${fontSans.variable}`}>
-      <body className="flex min-h-screen flex-col antialiased font-sans">
+      <body className="flex min-h-screen flex-col overflow-x-hidden antialiased font-sans">
         <LocalBusinessJsonLd />
         <a
           href="#main-content"

@@ -28,7 +28,7 @@ export default function TestimonialsPage() {
               Image coming soon
             </div>
             <p className="text-sm leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-            <footer className="mt-4 text-sm font-semibold text-accent">
+            <footer className="mt-4 text-sm font-semibold text-neutral-300">
               — {t.name}, {t.role}
               {t.context ? (
                 <span className="mt-1 block font-normal text-muted-foreground">

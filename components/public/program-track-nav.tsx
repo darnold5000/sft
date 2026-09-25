@@ -24,7 +24,7 @@ export function ProgramTrackNav({ active }: { active: Track }) {
             key={track.id}
             href={track.href}
             className={cn(
-              "rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide transition",
+              "rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/80",
               isActive
                 ? "bg-white text-black"
                 : "text-muted-foreground hover:text-foreground-soft",

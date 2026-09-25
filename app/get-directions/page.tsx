@@ -27,10 +27,6 @@ export default function DirectionsPage() {
           </strong>{" "}
           in your directions app, or use the link below.
         </p>
-        <p>
-          The current site also includes a directional video on this page — we
-          can embed it here once the production media URL is confirmed.
-        </p>
       </div>
       <a
         href={SITE.directionsUrl}
@@ -41,7 +37,10 @@ export default function DirectionsPage() {
         Open in Google Maps
       </a>
       <p className="mt-6 text-sm">
-        <Link href="/contact-us" className="text-accent hover:underline">
+        <Link
+          href="/contact-us"
+          className="text-neutral-200 underline-offset-2 hover:text-white hover:underline"
+        >
           Contact us
         </Link>{" "}
         if you need help finding the gym.

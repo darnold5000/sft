@@ -33,7 +33,7 @@ export default function AboutPage() {
             </div>
             <div>
               <h2 className="font-heading text-3xl">{member.name}</h2>
-              <p className="mt-1 text-lg font-semibold text-accent">
+              <p className="mt-1 text-lg font-semibold text-neutral-300">
                 {member.role}
               </p>
               <div className="mt-6 space-y-4 text-muted-foreground">

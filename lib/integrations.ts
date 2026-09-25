@@ -4,9 +4,13 @@ export const ACUITY = {
     process.env.NEXT_PUBLIC_ACUITY_ADULT_URL?.trim() || "",
   athleteOnboarding:
     process.env.NEXT_PUBLIC_ACUITY_ATHLETE_URL?.trim() || "",
-  /** Top-level Acuity scheduler for existing members (client Login control) */
+  /** Top-level Acuity scheduler (fallback link on /member-login) */
   memberLogin:
     process.env.NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL?.trim() ||
+    "https://app.acuityscheduling.com/schedule/e4690836",
+  /** Member scheduler embed on /member-login */
+  memberSchedulerEmbed:
+    process.env.NEXT_PUBLIC_ACUITY_MEMBER_SCHEDULER_EMBED_URL?.trim() ||
     "https://app.acuityscheduling.com/schedule/e4690836",
 } as const;
 

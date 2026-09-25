@@ -31,7 +31,7 @@ export default async function BlogPostPage({ params }: Props) {
     <Section>
       <Link
         href="/blog"
-        className="text-sm font-semibold text-accent hover:underline"
+        className="text-sm font-semibold text-neutral-200 underline-offset-2 hover:text-white hover:underline"
       >
         ← All posts
       </Link>
