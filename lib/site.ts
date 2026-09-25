@@ -23,6 +23,9 @@ export const SITE = {
   timezone: "America/Chicago",
   directionsUrl:
     "https://www.google.com/maps/search/?api=1&query=Strength+For+Today+Training+Crown+Point+IN",
+  /** Google Maps embed (no API key) for contact page */
+  mapsEmbedUrl:
+    "https://www.google.com/maps?q=874+N+Madison+St,+Crown+Point,+IN+46307&hl=en&z=15&output=embed",
   hours: [
     { days: "Monday – Thursday", time: "6:00am – 7:30pm" },
     { days: "Friday", time: "6:00am – 5:30pm" },
@@ -53,5 +56,6 @@ export const NAV_LINKS = [
   { href: "/about-me", label: "About" },
   { href: "/testimonials", label: "Results" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact-us", label: "Contact" },
   { href: "/store", label: "Shop" },
 ] as const;

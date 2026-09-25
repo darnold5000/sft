@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 const INTEREST_OPTIONS = [
   { value: "adult", label: "Adult Training" },
   { value: "athlete", label: "Athlete Performance" },
-  { value: "other", label: "Something Else" },
+  { value: "member", label: "Current Member Question" },
+  { value: "general", label: "General Question" },
 ] as const;
 
 type Interest = (typeof INTEREST_OPTIONS)[number]["value"];
@@ -42,9 +43,9 @@ function validate(fields: FormFields): FieldErrors {
   if (fields.phone.trim() && !/^[\d\s().+-]{7,}$/.test(fields.phone.trim())) {
     errors.phone = "Please enter a valid phone number.";
   }
-  if (!fields.interest) errors.interest = "Please select an interest.";
+  if (!fields.interest) errors.interest = "Please select an option.";
   if (!fields.message.trim()) {
-    errors.message = "Please tell us what you're looking for.";
+    errors.message = "Please enter a message.";
   } else if (fields.message.trim().length < 10) {
     errors.message = "Please add a bit more detail (at least 10 characters).";
   }
@@ -52,16 +53,16 @@ function validate(fields: FormFields): FieldErrors {
 }
 
 const labelClass =
-  "mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground";
+  "mb-1.5 block text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-neutral-500";
 
 function fieldClass(hasError: boolean) {
   return cn(
-    "w-full border bg-ink/60 px-4 py-3.5 text-base text-foreground-soft transition",
-    "placeholder:text-neutral-500",
-    "hover:border-neutral-500",
-    "focus:border-foreground-soft focus:outline-none focus:ring-2 focus:ring-white/15",
+    "w-full rounded-sm border bg-neutral-950/80 px-3 py-2.5 text-sm text-neutral-100 transition",
+    "placeholder:text-neutral-600",
+    "hover:border-neutral-600",
+    "focus:border-neutral-400 focus:outline-none focus:ring-1 focus:ring-white/10",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    hasError ? "border-neutral-400" : "border-border",
+    hasError ? "border-neutral-500" : "border-neutral-800",
   );
 }
 
@@ -91,7 +92,7 @@ export function ContactForm() {
     }
 
     setSubmitting(true);
-    // UI-only until a server handler is wired (see README / contact page notes).
+    // UI-only until a server handler is wired (see README).
     await new Promise((r) => setTimeout(r, 600));
     setSubmitting(false);
     setSubmitted(true);
@@ -99,21 +100,17 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <div
-        className="flex min-h-full flex-col justify-center border border-border bg-card/80 p-8 sm:p-10 lg:p-12"
-        role="status"
-      >
-        <CheckCircle2 className="size-10 text-foreground-soft" aria-hidden />
-        <h3 className="mt-6 font-display text-2xl font-semibold uppercase tracking-tight text-foreground">
+      <div className="py-4" role="status">
+        <CheckCircle2 className="size-8 text-neutral-300" aria-hidden />
+        <h2 className="mt-4 font-display text-xl font-semibold uppercase tracking-tight text-white">
           Message received
-        </h3>
-        <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-          Thanks for reaching out. Sam and the SFT team will follow up soon to
-          help you find the right next step.
+        </h2>
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-neutral-400">
+          Thanks for reaching out. Sam and the SFT team will follow up soon.
         </p>
         <button
           type="button"
-          className={cn(buttonLinkClass("secondary"), "mt-8 w-fit")}
+          className={cn(buttonLinkClass("outline", "sm"), "mt-6")}
           onClick={() => {
             setSubmitted(false);
             setFields(initialFields);
@@ -127,183 +124,156 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="border border-border bg-card/80 p-8 sm:p-10 lg:p-12"
-      noValidate
-    >
-      <h2 className="font-display text-2xl font-semibold uppercase tracking-tight text-foreground sm:text-3xl">
-        Start a conversation
-      </h2>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        Share a few details and we will get back to you about adult training,
-        athlete performance, or general questions.
-      </p>
-
-      <div className="mt-10 space-y-6">
-        <div>
-          <label htmlFor="contact-name" className={labelClass}>
-            Name
-          </label>
-          <input
-            id="contact-name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            value={fields.name}
-            onChange={(e) => update("name", e.target.value)}
-            className={fieldClass(Boolean(errors.name))}
-            aria-invalid={errors.name ? true : undefined}
-            aria-describedby={errors.name ? "contact-name-error" : undefined}
-            disabled={submitting}
-          />
-          {errors.name ? (
-            <p id="contact-name-error" className="mt-2 text-sm text-neutral-300">
-              {errors.name}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="contact-email" className={labelClass}>
-              Email
-            </label>
-            <input
-              id="contact-email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={fields.email}
-              onChange={(e) => update("email", e.target.value)}
-              className={fieldClass(Boolean(errors.email))}
-              aria-invalid={errors.email ? true : undefined}
-              aria-describedby={
-                errors.email ? "contact-email-error" : undefined
-              }
-              disabled={submitting}
-            />
-            {errors.email ? (
-              <p
-                id="contact-email-error"
-                className="mt-2 text-sm text-neutral-300"
-              >
-                {errors.email}
-              </p>
-            ) : null}
-          </div>
-          <div>
-            <label htmlFor="contact-phone" className={labelClass}>
-              Phone
-            </label>
-            <input
-              id="contact-phone"
-              name="phone"
-              type="tel"
-              autoComplete="tel"
-              value={fields.phone}
-              onChange={(e) => update("phone", e.target.value)}
-              className={fieldClass(Boolean(errors.phone))}
-              aria-invalid={errors.phone ? true : undefined}
-              aria-describedby={
-                errors.phone ? "contact-phone-error" : undefined
-              }
-              disabled={submitting}
-            />
-            {errors.phone ? (
-              <p
-                id="contact-phone-error"
-                className="mt-2 text-sm text-neutral-300"
-              >
-                {errors.phone}
-              </p>
-            ) : null}
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="contact-interest" className={labelClass}>
-            Interest
-          </label>
-          <select
-            id="contact-interest"
-            name="interest"
-            value={fields.interest}
-            onChange={(e) =>
-              update("interest", e.target.value as FormFields["interest"])
-            }
-            className={cn(fieldClass(Boolean(errors.interest)), "appearance-none")}
-            aria-invalid={errors.interest ? true : undefined}
-            aria-describedby={
-              errors.interest ? "contact-interest-error" : undefined
-            }
-            disabled={submitting}
-          >
-            <option value="" disabled className="bg-ink text-neutral-400">
-              Select one
-            </option>
-            {INTEREST_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value} className="bg-ink">
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          {errors.interest ? (
-            <p
-              id="contact-interest-error"
-              className="mt-2 text-sm text-neutral-300"
-            >
-              {errors.interest}
-            </p>
-          ) : null}
-        </div>
-
-        <div>
-          <label htmlFor="contact-message" className={labelClass}>
-            Tell us what you&apos;re looking for
-          </label>
-          <textarea
-            id="contact-message"
-            name="message"
-            rows={5}
-            value={fields.message}
-            onChange={(e) => update("message", e.target.value)}
-            className={cn(fieldClass(Boolean(errors.message)), "resize-y min-h-[8rem]")}
-            aria-invalid={errors.message ? true : undefined}
-            aria-describedby={
-              errors.message ? "contact-message-error" : undefined
-            }
-            disabled={submitting}
-          />
-          {errors.message ? (
-            <p
-              id="contact-message-error"
-              className="mt-2 text-sm text-neutral-300"
-            >
-              {errors.message}
-            </p>
-          ) : null}
-        </div>
-
-        <button
-          type="submit"
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <div>
+        <label htmlFor="contact-name" className={labelClass}>
+          Name
+        </label>
+        <input
+          id="contact-name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          value={fields.name}
+          onChange={(e) => update("name", e.target.value)}
+          className={fieldClass(Boolean(errors.name))}
+          aria-invalid={errors.name ? true : undefined}
+          aria-describedby={errors.name ? "contact-name-error" : undefined}
           disabled={submitting}
-          className={cn(
-            buttonLinkClass("default", "lg"),
-            "group w-full sm:w-auto",
-          )}
-        >
-          <span className="uppercase tracking-wider">
-            {submitting ? "Sending…" : "Send message"}
-          </span>
-          {!submitting ? (
-            <ArrowRight
-              className="size-4 transition-transform group-hover:translate-x-0.5"
-              aria-hidden
-            />
-          ) : null}
-        </button>
+        />
+        {errors.name ? (
+          <p id="contact-name-error" className="mt-1.5 text-xs text-neutral-400">
+            {errors.name}
+          </p>
+        ) : null}
       </div>
+
+      <div>
+        <label htmlFor="contact-email" className={labelClass}>
+          Email
+        </label>
+        <input
+          id="contact-email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          value={fields.email}
+          onChange={(e) => update("email", e.target.value)}
+          className={fieldClass(Boolean(errors.email))}
+          aria-invalid={errors.email ? true : undefined}
+          aria-describedby={errors.email ? "contact-email-error" : undefined}
+          disabled={submitting}
+        />
+        {errors.email ? (
+          <p id="contact-email-error" className="mt-1.5 text-xs text-neutral-400">
+            {errors.email}
+          </p>
+        ) : null}
+      </div>
+
+      <div>
+        <label htmlFor="contact-phone" className={labelClass}>
+          Phone
+        </label>
+        <input
+          id="contact-phone"
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          value={fields.phone}
+          onChange={(e) => update("phone", e.target.value)}
+          className={fieldClass(Boolean(errors.phone))}
+          aria-invalid={errors.phone ? true : undefined}
+          aria-describedby={errors.phone ? "contact-phone-error" : undefined}
+          disabled={submitting}
+        />
+        {errors.phone ? (
+          <p id="contact-phone-error" className="mt-1.5 text-xs text-neutral-400">
+            {errors.phone}
+          </p>
+        ) : null}
+      </div>
+
+      <div>
+        <label htmlFor="contact-interest" className={labelClass}>
+          I&apos;m interested in
+        </label>
+        <select
+          id="contact-interest"
+          name="interest"
+          value={fields.interest}
+          onChange={(e) =>
+            update("interest", e.target.value as FormFields["interest"])
+          }
+          className={cn(fieldClass(Boolean(errors.interest)), "appearance-none")}
+          aria-invalid={errors.interest ? true : undefined}
+          aria-describedby={
+            errors.interest ? "contact-interest-error" : undefined
+          }
+          disabled={submitting}
+        >
+          <option value="" disabled className="bg-neutral-950 text-neutral-500">
+            Select one
+          </option>
+          {INTEREST_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value} className="bg-neutral-950">
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        {errors.interest ? (
+          <p
+            id="contact-interest-error"
+            className="mt-1.5 text-xs text-neutral-400"
+          >
+            {errors.interest}
+          </p>
+        ) : null}
+      </div>
+
+      <div>
+        <label htmlFor="contact-message" className={labelClass}>
+          Message
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows={4}
+          value={fields.message}
+          onChange={(e) => update("message", e.target.value)}
+          className={cn(fieldClass(Boolean(errors.message)), "min-h-[6.5rem] resize-y")}
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={
+            errors.message ? "contact-message-error" : undefined
+          }
+          disabled={submitting}
+        />
+        {errors.message ? (
+          <p
+            id="contact-message-error"
+            className="mt-1.5 text-xs text-neutral-400"
+          >
+            {errors.message}
+          </p>
+        ) : null}
+      </div>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className={cn(
+          buttonLinkClass("default", "default"),
+          "group mt-2 w-full font-display uppercase tracking-wider sm:w-auto",
+        )}
+      >
+        {submitting ? "Sending…" : "Send message"}
+        {!submitting ? (
+          <ArrowRight
+            className="size-4 transition-transform group-hover:translate-x-0.5"
+            aria-hidden
+          />
+        ) : null}
+      </button>
     </form>
   );
 }

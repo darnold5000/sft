@@ -1,8 +1,10 @@
+import { SFT_IMAGES } from "@/lib/assets";
+
 export type TeamMember = {
   id: string;
   name: string;
   role: string;
-  image?: string;
+  image: string;
   bio: string[];
 };
 
@@ -11,6 +13,7 @@ export const TEAM: TeamMember[] = [
     id: "sam-vree",
     name: "Samuel Vree",
     role: "Founder & Head Trainer",
+    image: SFT_IMAGES.coachSam,
     bio: [
       "Samuel Vree is the founder and head trainer at Strength For Today. He started SFT in November of 2024 because it combines fitness and helping other people.",
       "He grew up in Lansing, Illinois and developed a love for the weight room in high school at Illiana Christian. He studied exercise science at Hope College while playing four years of varsity basketball.",
@@ -22,6 +25,7 @@ export const TEAM: TeamMember[] = [
     id: "fletcher-bandstra",
     name: "Fletcher Bandstra",
     role: "Coach",
+    image: SFT_IMAGES.coachFletcher,
     bio: [
       "Fletcher Bandstra joined Strength For Today after working at the Exercise Coach in college. He returned home to continue his strength and conditioning career at SFT, starting at the end of May 2026.",
       "Born and raised in Schererville, Fletcher studied Kinesiology at Calvin University and pitched for the baseball team. He stayed a fifth year to complete his masters in Exercise Science with a specialization in Sports Performance.",

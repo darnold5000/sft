@@ -184,6 +184,7 @@ export default function HomePage() {
               name={member.name}
               role={member.role}
               teaser={member.bio[0]}
+              image={member.image}
               variant={i === 1 ? "muted" : "default"}
             />
           ))}

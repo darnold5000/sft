@@ -47,11 +47,6 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link href="/contact-us" className="hover:text-white">
-                Contact
-              </Link>
-            </li>
-            <li>
               <Link href="/get-directions" className="hover:text-white">
                 Directions
               </Link>

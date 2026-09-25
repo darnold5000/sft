@@ -22,6 +22,10 @@ npm run dev
 | `NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL` | Member gateway CTA — canonical Acuity scheduler (`/schedule/e4690836`) |
 | `NEXT_PUBLIC_SQUARESPACE_STORE_URL` | Operational store (default: `https://sft-training.com/store`) |
 
+### Contact form
+
+The `/contact-us` form is **UI + client validation only** until a server route is added. To deliver submissions to `sam@sft-training.com`, wire a Server Action or `app/api/contact/route.ts` using Resend (or another provider), add `RESEND_API_KEY` and a verified sender domain in Vercel, and point the form `fetch` at that endpoint. Do not commit API keys.
+
 Acuity URLs are read at build time from the vars above. Embeds use an iframe `src` plus `embed.acuityscheduling.com/js/embed.js` (see `components/public/acuity-embed.tsx`). Schedulers appear on `/adults` and `/athletes` and on legacy `/adults-intake-1` and `/athletes-intake`. `/member-login` is a minimal gateway that opens the member scheduler in a new tab (no embed).
 
 ## Blog content

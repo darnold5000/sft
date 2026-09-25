@@ -25,11 +25,9 @@ export const SFT_IMAGES = {
     `${CDN}/25ddc0a5-966d-46b8-9cc9-a78ec814c24b/IMG_0994.jpg`,
   athleteTrainingB:
     `${CDN}/4177d38a-86d0-450b-9fcf-d373a6b9957e/IMG_0997.jpg`,
-  /** Live /about-me coach photography */
-  coachSam:
-    `${CDN}/5d3cfe86-e8da-422c-9319-1ae549fc44ea/IMG_1179.jpg`,
-  coachFletcher:
-    `${CDN}/f879b2bc-be3b-4a32-9290-348b9bf15e77/IMG_4111+2.jpeg`,
+  /** Coach headshots — `public/images/coaches/` */
+  coachSam: "/images/coaches/sam.webp",
+  coachFletcher: "/images/coaches/fletcher.jpg",
 } as const;
 
 /** Product photography from the live SFT store (CDN). */
