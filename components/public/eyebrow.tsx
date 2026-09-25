@@ -13,8 +13,8 @@ export function Eyebrow({
     <p
       className={cn(
         "text-[0.7rem] font-semibold uppercase tracking-[0.22em] sm:text-xs",
-        tone === "light" && "text-white/90",
-        tone === "muted" && "text-neutral-400",
+        tone === "light" && "text-foreground-soft/90",
+        tone === "muted" && "text-muted-foreground",
         tone === "dim" && "text-neutral-500",
         className,
       )}

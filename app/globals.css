@@ -3,6 +3,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-soft: var(--foreground-soft);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
   --font-heading: var(--font-display);
@@ -22,26 +23,27 @@
 }
 
 :root {
-  --background: #050505;
+  --background: #0a0a0a;
   --foreground: #f7f7f7;
-  --card: #111111;
-  --card-foreground: #f7f7f7;
-  --muted: #1a1a1a;
-  --muted-foreground: #a3a3a3;
+  --foreground-soft: #e8e8e8;
+  --card: #121212;
+  --card-foreground: #f0f0f0;
+  --muted: #1c1c1c;
+  --muted-foreground: #adadad;
   --primary: #ffffff;
   --primary-foreground: #0a0a0a;
   --accent: #d4d4d4;
   --accent-foreground: #0a0a0a;
   --brand: #ffffff;
   --brand-foreground: #0a0a0a;
-  --ink: #000000;
-  --border: #333333;
+  --ink: #080808;
+  --border: #3a3a3a;
   --radius: 0.75rem;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--muted-foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
@@ -68,7 +70,7 @@ body {
 }
 
 .text-outline-ghost {
-  -webkit-text-stroke: 1px rgb(255 255 255 / 0.14);
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.12);
   color: transparent;
 }
 
@@ -90,7 +92,7 @@ body {
 }
 
 .prose-sft a {
-  color: var(--foreground);
+  color: var(--foreground-soft);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

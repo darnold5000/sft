@@ -32,11 +32,11 @@ export function SectionHeading({
         align === "center" && "mx-auto text-center",
       )}
     >
-      <h2 className="font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
+      <h2 className="font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-foreground-soft sm:text-5xl lg:text-[3.25rem]">
         {title}
       </h2>
       {subtitle ? (
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg">
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           {subtitle}
         </p>
       ) : null}

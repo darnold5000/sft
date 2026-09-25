@@ -31,7 +31,7 @@ export function SiteHeader() {
             height={40}
             className="h-10 w-10 rounded-md object-cover"
           />
-          <span className="truncate font-display text-lg font-semibold uppercase tracking-wide text-foreground">
+          <span className="truncate font-display text-lg font-semibold uppercase tracking-wide text-foreground-soft">
             {SITE.shortName}
           </span>
         </Link>
@@ -49,7 +49,7 @@ export function SiteHeader() {
                   "relative rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide transition",
                   active
                     ? "text-white after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-white"
-                    : "text-white/75 hover:text-white",
+                    : "text-foreground-soft/70 hover:text-foreground-soft",
                 )}
               >
                 {link.label}
