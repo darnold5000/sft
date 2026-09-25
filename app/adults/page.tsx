@@ -2,8 +2,7 @@ import Image from "next/image";
 import { BackgroundWord } from "@/components/public/background-word";
 import { EditorialQuote } from "@/components/public/editorial-quote";
 import { Eyebrow } from "@/components/public/eyebrow";
-import { ProgramPageHero } from "@/components/public/program-page-hero";
-import { ProgramScheduleClosing } from "@/components/public/program-schedule-closing";
+import { ProgramBookingLead } from "@/components/public/program-booking-lead";
 import { ProgramStepsList } from "@/components/public/program-steps-list";
 import { Section } from "@/components/public/section";
 import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
@@ -26,20 +25,14 @@ export default function AdultsPage() {
 
   return (
     <>
-      <ProgramPageHero
+      <ProgramBookingLead
         track="adult"
         title="Adult Training"
         subtitle={ADULT_PROGRAM.heroSubtitle}
-        imageSrc={SFT_IMAGES.adultTrainingPanel}
-        imageAlt="Adults training at Strength For Today"
-      />
-
-      <ProgramScheduleClosing
-        placement="primary"
+        bookingHeadline={ADULT_PROGRAM.bookingHeadline}
+        bookingDescription={ADULT_PROGRAM.bookingDescription}
         scheduleUrl={ACUITY.adultOnboarding}
         scheduleTitle="Adult Program Onboarding Call"
-        headline={ADULT_PROGRAM.bookingHeadline}
-        description={ADULT_PROGRAM.bookingDescription}
       />
 
       <Section className="border-b border-neutral-800 bg-background">

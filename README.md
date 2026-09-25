@@ -19,10 +19,10 @@ npm run dev
 | `NEXT_PUBLIC_ALLOW_INDEXING` | `true` on production marketing deploys |
 | `NEXT_PUBLIC_ACUITY_ADULT_URL` | Adult onboarding scheduler embed URL |
 | `NEXT_PUBLIC_ACUITY_ATHLETE_URL` | Athlete onboarding scheduler embed URL |
-| `NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL` | Member login / book training |
+| `NEXT_PUBLIC_ACUITY_MEMBER_LOGIN_URL` | Member gateway CTA — canonical Acuity scheduler (`/schedule/e4690836`) |
 | `NEXT_PUBLIC_SQUARESPACE_STORE_URL` | Operational store (default: `https://sft-training.com/store`) |
 
-Acuity URLs are read at build time from the vars above. Embeds use an iframe `src` plus `embed.acuityscheduling.com/js/embed.js` (see `components/public/acuity-embed.tsx`). Schedulers appear on `/adults` and `/athletes` and on legacy `/adults-intake-1` and `/athletes-intake`. Member login opens Acuity client login in a new tab from the site header.
+Acuity URLs are read at build time from the vars above. Embeds use an iframe `src` plus `embed.acuityscheduling.com/js/embed.js` (see `components/public/acuity-embed.tsx`). Schedulers appear on `/adults` and `/athletes` and on legacy `/adults-intake-1` and `/athletes-intake`. `/member-login` is a minimal gateway that opens the member scheduler in a new tab (no embed).
 
 ## Blog content
 

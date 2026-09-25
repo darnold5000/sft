@@ -2,8 +2,7 @@ import Image from "next/image";
 import { BackgroundWord } from "@/components/public/background-word";
 import { EditorialQuote } from "@/components/public/editorial-quote";
 import { Eyebrow } from "@/components/public/eyebrow";
-import { ProgramPageHero } from "@/components/public/program-page-hero";
-import { ProgramScheduleClosing } from "@/components/public/program-schedule-closing";
+import { ProgramBookingLead } from "@/components/public/program-booking-lead";
 import { ProgramStepsList } from "@/components/public/program-steps-list";
 import { Section } from "@/components/public/section";
 import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
@@ -26,20 +25,14 @@ export default function AthletesPage() {
 
   return (
     <>
-      <ProgramPageHero
+      <ProgramBookingLead
         track="athlete"
         title="Athlete Performance"
         subtitle={ATHLETE_PROGRAM.heroSubtitle}
-        imageSrc={SFT_IMAGES.athleteTrainingPanel}
-        imageAlt="High school athlete training at Strength For Today"
-      />
-
-      <ProgramScheduleClosing
-        placement="primary"
+        bookingHeadline={ATHLETE_PROGRAM.bookingHeadline}
+        bookingDescription={ATHLETE_PROGRAM.bookingDescription}
         scheduleUrl={ACUITY.athleteOnboarding}
         scheduleTitle="Athlete Program Onboarding Call"
-        headline={ATHLETE_PROGRAM.bookingHeadline}
-        description={ATHLETE_PROGRAM.bookingDescription}
       />
 
       <Section className="border-b border-neutral-800 bg-background">
