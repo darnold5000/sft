@@ -9,6 +9,11 @@ type Props = {
   title: string;
   /** Slightly shorter default height for program pages above the fold */
   compact?: boolean;
+  /**
+   * Program hero column: direct appointment-type URL, ~50% page width on desktop.
+   * Sized for Acuity’s calendar + time-slots row (not the tall mobile stack).
+   */
+  layout?: "default" | "program";
   /** No outer card border — iframe only (program booking column) */
   bare?: boolean;
 };
@@ -30,8 +35,11 @@ export function AcuityEmbed({
   scheduleUrl,
   title,
   compact = false,
+  layout = "default",
   bare = false,
 }: Props) {
+  const isProgram = layout === "program";
+  const isCompact = compact || isProgram;
   const reactId = useId().replace(/:/g, "");
   const iframeId = `acuity-iframe-${reactId}`;
 
@@ -61,9 +69,11 @@ export function AcuityEmbed({
     );
   }
 
-  const iframeClass = compact
-    ? "min-h-[min(640px,68vh)] w-full max-w-full border-0 bg-white"
-    : "min-h-[min(800px,80vh)] w-full max-w-full border-0 bg-white";
+  const iframeClass = isProgram
+    ? "min-h-[min(520px,58vh)] w-full min-w-0 border-0 bg-white lg:min-h-[min(540px,62vh)]"
+    : isCompact
+      ? "min-h-[min(640px,68vh)] w-full max-w-full border-0 bg-white"
+      : "min-h-[min(800px,80vh)] w-full max-w-full border-0 bg-white";
 
   const wrapperClass = bare
     ? "max-w-full overflow-hidden"
@@ -77,7 +87,7 @@ export function AcuityEmbed({
         src={scheduleUrl}
         title={title}
         width="100%"
-        height={compact ? 640 : 800}
+        height={isProgram ? 540 : isCompact ? 640 : 800}
         className={iframeClass}
         allow="payment"
       />

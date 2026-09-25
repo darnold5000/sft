@@ -29,7 +29,10 @@ export function ProgramBookingLead({
       className="scroll-mt-24 border-b border-neutral-800 bg-black pt-10 sm:pt-12"
     >
       <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 sm:pb-10">
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_min(540px,560px)] lg:gap-8 xl:gap-10">
+        {/* Wider scheduler column (~58%) so iframe clears Acuity’s desktop breakpoint */}
+        <div
+          className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:gap-8 xl:gap-10"
+        >
           <div className="min-w-0">
             <Eyebrow tone="muted">Programs</Eyebrow>
             <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
@@ -57,11 +60,11 @@ export function ProgramBookingLead({
             </div>
           </div>
 
-          <div className="min-w-0 w-full max-w-[560px] lg:max-w-none lg:justify-self-end">
+          <div className="min-w-0 w-full">
             <AcuityEmbed
               scheduleUrl={scheduleUrl}
               title={scheduleTitle}
-              compact
+              layout="program"
               bare
             />
           </div>
