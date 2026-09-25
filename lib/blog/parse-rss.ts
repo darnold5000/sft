@@ -53,9 +53,9 @@ export function getAllBlogPosts(): BlogPost[] {
   const items = raw.match(/<item>[\s\S]*?<\/item>/gi) ?? [];
 
   cached = items
-    .map((block) => {
+    .flatMap((block) => {
       const link = extractTag(block, "link");
-      if (!link) return null;
+      if (!link) return [];
       const title = extractTag(block, "title") ?? "Untitled";
       const author =
         block.match(/<dc:creator>([\s\S]*?)<\/dc:creator>/i)?.[1]?.trim() ??
@@ -66,7 +66,7 @@ export function getAllBlogPosts(): BlogPost[] {
       );
       const bodyHtml = descMatch?.[1] ?? "";
 
-      return {
+      const post: BlogPost = {
         slug: extractLinkSlug(link),
         title,
         author: decodeEntities(author),
@@ -74,9 +74,9 @@ export function getAllBlogPosts(): BlogPost[] {
         publishedAt: toIsoDate(pubDate),
         image: extractMediaUrl(block),
         bodyHtml,
-      } satisfies BlogPost;
+      };
+      return [post];
     })
-    .filter((p): p is BlogPost => p !== null)
     .sort(
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
