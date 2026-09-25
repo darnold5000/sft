@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { buttonLinkClass } from "@/components/ui/button";
+import { buttonLinkClass, type ButtonProps } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 
 type CtaLinkProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "default" | "secondary" | "ghost" | "accent";
-  size?: "default" | "sm" | "lg";
+  variant?: NonNullable<ButtonProps["variant"]>;
+  size?: NonNullable<ButtonProps["size"]>;
   className?: string;
   showArrow?: boolean;
 } & Pick<ComponentProps<typeof Link>, "target" | "rel">;
