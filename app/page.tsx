@@ -7,13 +7,13 @@ import { EditorialQuote } from "@/components/public/editorial-quote";
 import { Eyebrow } from "@/components/public/eyebrow";
 import { ProgramPanel } from "@/components/public/program-panel";
 import { Section, SectionHeading } from "@/components/public/section";
-import { SFT_IMAGES } from "@/lib/assets";
+import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
 import { getAllBlogPosts } from "@/lib/blog/parse-rss";
 import { getAllTestimonials } from "@/lib/testimonials";
 import { TEAM } from "@/lib/team";
 import { createMetadata } from "@/lib/seo";
 import { SQUARESPACE_STORE_URL } from "@/lib/site";
-import { cn } from "@/lib/utils";
+import { buttonLinkClass } from "@/components/ui/button";
 
 export const metadata = createMetadata({
   title: "Strength For Today Training",
@@ -32,34 +32,35 @@ export default function HomePage() {
   const latest = posts[0];
   const morePosts = posts.slice(1, 3);
   const testimonials = getAllTestimonials();
-  const featuredQuote = testimonials.find((t) => t.id === "martha-metzger") ?? testimonials[0];
+  const featuredQuote =
+    testimonials.find((t) => t.id === "martha-metzger") ?? testimonials[0];
   const secondaryQuotes = testimonials
     .filter((t) => t.id !== featuredQuote.id)
     .slice(0, 2);
 
   return (
     <>
-      <section className="relative min-h-[min(92vh,52rem)] overflow-hidden border-b border-border/60 bg-ink">
+      <section className="relative min-h-[min(92vh,52rem)] overflow-hidden border-b border-neutral-800 bg-black">
         <div className="absolute inset-0">
           <Image
-            src={SFT_IMAGES.facility}
+            src={sftImageUrl(SFT_IMAGES.trainingHero, 2500)}
             alt=""
             fill
-            className="object-cover object-center scale-105 motion-safe:transition-transform motion-safe:duration-[1.2s] hover:scale-100"
+            className="object-cover object-center"
             priority
             sizes="100vw"
           />
         </div>
         <div
-          className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/25"
+          className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/35"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/50 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent"
           aria-hidden
         />
         <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40 lg:min-h-[min(92vh,52rem)]">
-          <Eyebrow className="motion-reveal text-accent">
+          <Eyebrow tone="light" className="motion-reveal">
             Crown Point, Indiana · Northwest Indiana
           </Eyebrow>
           <h1
@@ -67,11 +68,14 @@ export default function HomePage() {
             style={{ animationDelay: "80ms" }}
           >
             Individualized training for{" "}
-            <span className="text-brand">adults</span> &amp;{" "}
-            <span className="text-accent">athletes</span>
+            <span className="mt-1 block font-light text-neutral-300 sm:mt-0 sm:inline">
+              adults
+            </span>{" "}
+            <span className="text-neutral-500">&amp;</span>{" "}
+            <span className="font-extrabold text-white">athletes</span>
           </h1>
           <p
-            className="motion-reveal mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl"
+            className="motion-reveal mt-6 max-w-xl text-lg leading-relaxed text-neutral-300 sm:text-xl"
             style={{ animationDelay: "140ms" }}
           >
             Semi-private coaching with programs built for you — from first-time
@@ -84,7 +88,7 @@ export default function HomePage() {
             <CtaLink href="/adults" variant="default" size="lg">
               Adult Training
             </CtaLink>
-            <CtaLink href="/athletes" variant="accent" size="lg">
+            <CtaLink href="/athletes" variant="outline" size="lg">
               Athlete Performance
             </CtaLink>
             <CtaLink href="/get-started" variant="secondary" size="lg">
@@ -94,40 +98,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Section className="border-b border-border/40 bg-background">
+      <Section className="border-b border-neutral-800 bg-background">
         <div className="mb-12 max-w-3xl">
-          <Eyebrow tone="brand">Programs</Eyebrow>
-          <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight sm:text-5xl">
+          <Eyebrow tone="muted">Programs</Eyebrow>
+          <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
             Two paths. One standard of coaching.
           </h2>
         </div>
         <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
           <ProgramPanel
-            variant="adult"
+            emphasis="solid"
             eyebrow="Adults"
             title="Adult Training"
             description="Personalized semi-private training — move better, feel better, and build consistency with programming every session."
             href="/adults"
             cta="Explore adult training"
+            imageSrc={SFT_IMAGES.adultTrainingPanel}
+            imageAlt="Adults training at Strength For Today"
           />
           <ProgramPanel
-            variant="athlete"
+            emphasis="outline"
             eyebrow="Athletes"
             title="Athlete Performance"
             description="Youth and high school athletes — speed, agility, strength, and hands-on coaching built around sport and goals."
             href="/athletes"
             cta="Explore athlete performance"
+            imageSrc={SFT_IMAGES.athleteTrainingPanel}
+            imageAlt="High school athlete training at Strength For Today"
           />
         </div>
       </Section>
 
-      <Section className="relative overflow-hidden bg-ink surface-noise">
+      <Section className="relative overflow-hidden bg-black surface-noise">
         <BackgroundWord className="left-0 top-8 -translate-x-[5%]">
           Strength
         </BackgroundWord>
         <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <Eyebrow>Why SFT</Eyebrow>
+            <Eyebrow tone="muted">Why SFT</Eyebrow>
             <p className="mt-6 font-display text-3xl font-medium leading-tight text-white sm:text-4xl">
               Semi-private training for adults, high school athletes, and youth
               across greater Northwest Indiana.
@@ -135,29 +143,29 @@ export default function HomePage() {
           </div>
           <div className="space-y-10 lg:col-span-7 lg:pt-4">
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-brand">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-white">
                 Who we are
               </p>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-base leading-relaxed text-neutral-400">
                 We create individualized programs for everyone who steps through
                 our door — not one-size-fits-all group workouts.
               </p>
             </div>
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-neutral-300">
                 Our mission
               </p>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-base leading-relaxed text-neutral-400">
                 Meet each client where they are, guide their fitness journey, and
                 empower them to build a healthier, stronger, more fulfilling
                 future.
               </p>
             </div>
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500">
                 How to start
               </p>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-base leading-relaxed text-neutral-400">
                 Adults and athletes follow a thorough onboarding process —
                 questionnaire or intake, a conversation with Sam, then your
                 starting point session or assessment.
@@ -176,13 +184,13 @@ export default function HomePage() {
               name={member.name}
               role={member.role}
               teaser={member.bio[0]}
-              monogramTone={i === 0 ? "brand" : "accent"}
+              variant={i === 1 ? "muted" : "default"}
             />
           ))}
         </div>
       </Section>
 
-      <Section className="border-y border-border/50 bg-gradient-to-b from-card/30 to-background">
+      <Section className="border-y border-neutral-800 bg-neutral-950">
         <SectionHeading
           title="Results"
           subtitle="Parents and clients share how individualized coaching shows up in strength, speed, confidence, and everyday life."
@@ -217,14 +225,14 @@ export default function HomePage() {
       <Section>
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <Eyebrow>From the blog</Eyebrow>
-            <h2 className="mt-2 font-display text-4xl font-semibold uppercase tracking-tight sm:text-5xl">
+            <Eyebrow tone="muted">From the blog</Eyebrow>
+            <h2 className="mt-2 font-display text-4xl font-semibold uppercase tracking-tight text-white sm:text-5xl">
               Training &amp; mindset
             </h2>
           </div>
           <Link
             href="/blog"
-            className="text-sm font-semibold uppercase tracking-wider text-accent hover:text-white"
+            className="text-sm font-semibold uppercase tracking-wider text-neutral-400 transition hover:text-white"
           >
             View all posts →
           </Link>
@@ -234,29 +242,29 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-12">
             <Link
               href={`/blog/${latest.slug}`}
-              className="group relative block overflow-hidden bg-brand/10 lg:col-span-7 lg:min-h-[18rem]"
+              className="group relative block overflow-hidden border border-neutral-800 bg-neutral-950 lg:col-span-7 lg:min-h-[18rem]"
             >
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-brand/25 via-card to-ink"
-                aria-hidden
-              />
               {latest.image ? (
                 <Image
                   src={latest.image}
                   alt=""
                   fill
-                  className="object-cover opacity-40 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-50"
+                  className="object-cover opacity-35 transition duration-500 group-hover:scale-[1.02] group-hover:opacity-45"
                   sizes="(max-width: 1024px) 100vw, 60vw"
                 />
               ) : null}
-              <div className="relative flex h-full flex-col justify-end p-8 sm:p-10">
-                <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/40"
+                aria-hidden
+              />
+              <div className="relative flex h-full min-h-[18rem] flex-col justify-end p-8 sm:p-10">
+                <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
                   Latest · {latest.author}
                 </p>
-                <h3 className="mt-3 font-display text-3xl font-semibold uppercase leading-tight text-white transition group-hover:text-accent sm:text-4xl">
+                <h3 className="mt-3 font-display text-3xl font-semibold uppercase leading-tight text-white transition group-hover:text-neutral-200 sm:text-4xl">
                   {latest.title}
                 </h3>
-                <p className="mt-3 line-clamp-2 text-sm text-white/75">
+                <p className="mt-3 line-clamp-2 text-sm text-neutral-400">
                   {stripHtml(latest.bodyHtml).slice(0, 160)}…
                 </p>
               </div>
@@ -266,9 +274,9 @@ export default function HomePage() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group border-l-2 border-border pl-6 transition hover:border-accent"
+                  className="group border-l border-neutral-700 pl-6 transition hover:border-white"
                 >
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-neutral-500">
                     {new Date(post.publishedAt).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
@@ -276,7 +284,7 @@ export default function HomePage() {
                     })}{" "}
                     · {post.author}
                   </p>
-                  <h3 className="mt-2 font-display text-xl font-semibold uppercase leading-snug text-white group-hover:text-accent">
+                  <h3 className="mt-2 font-display text-xl font-semibold uppercase leading-snug text-white group-hover:text-neutral-300">
                     {post.title}
                   </h3>
                 </Link>
@@ -286,9 +294,9 @@ export default function HomePage() {
         ) : null}
       </Section>
 
-      <section className="relative overflow-hidden border-y border-border/60 bg-ink py-16 sm:py-20">
+      <section className="relative overflow-hidden border-y border-neutral-800 bg-black py-16 sm:py-20">
         <div
-          className="absolute right-0 top-1/2 size-64 -translate-y-1/2 opacity-[0.06] sm:size-96"
+          className="absolute right-0 top-1/2 size-64 -translate-y-1/2 opacity-[0.05] sm:size-96"
           aria-hidden
         >
           <Image
@@ -301,18 +309,18 @@ export default function HomePage() {
         </div>
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="max-w-xl">
-            <Eyebrow tone="accent">Merch</Eyebrow>
+            <Eyebrow tone="muted">Merch</Eyebrow>
             <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
               Official SFT gear
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-neutral-400">
               Apparel, hats, drinkware, and more — rep Strength For Today on and
               off the floor.
             </p>
           </div>
           <CtaLink
             href={SQUARESPACE_STORE_URL}
-            variant="accent"
+            variant="default"
             size="lg"
             target="_blank"
           >
@@ -321,7 +329,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Section className="relative overflow-hidden bg-brand">
+      <Section className="relative overflow-hidden border-t border-neutral-800 bg-neutral-950">
         <span
           className="pointer-events-none absolute -right-4 top-1/2 -translate-y-1/2 font-display text-[clamp(5rem,20vw,14rem)] font-bold uppercase leading-none text-outline-ghost"
           aria-hidden
@@ -333,36 +341,29 @@ export default function HomePage() {
             <h2 className="font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
               Ready when you are
             </h2>
-            <p className="mt-4 max-w-lg text-white/90">
+            <p className="mt-4 max-w-lg text-neutral-400">
               Choose adult training or athlete performance — we will walk you
               through onboarding step by step.
             </p>
           </div>
-          <CtaLink
-            href="/get-started"
-            variant="secondary"
-            size="lg"
-            className="border-white/30 bg-ink text-white hover:bg-ink/90"
-          >
+          <CtaLink href="/get-started" variant="default" size="lg">
             Get started
           </CtaLink>
         </div>
       </Section>
 
-      <Section id="newsletter" className="border-t border-border/40">
+      <Section id="newsletter" className="border-t border-neutral-800">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow tone="muted">Newsletter</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
             Stay in the loop
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-4 text-neutral-400">
             Health tips, recipes, facility updates, and more from the SFT team.
           </p>
           <a
             href="https://sft-training.com/"
-            className={cn(
-              "mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-brand px-6 text-base font-semibold text-brand-foreground transition hover:bg-brand/90",
-            )}
+            className={buttonLinkClass("default", "lg") + " mt-8 inline-flex"}
             target="_blank"
             rel="noreferrer"
           >

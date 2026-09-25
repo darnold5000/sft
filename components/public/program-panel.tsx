@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/public/eyebrow";
+import { sftImageUrl } from "@/lib/assets";
 import { ArrowRight } from "lucide-react";
 
 type ProgramPanelProps = {
@@ -9,7 +10,10 @@ type ProgramPanelProps = {
   description: string;
   href: string;
   cta: string;
-  variant: "adult" | "athlete";
+  imageSrc: string;
+  imageAlt: string;
+  /** Visual distinction without color — e.g. outline vs solid label */
+  emphasis?: "solid" | "outline";
 };
 
 export function ProgramPanel({
@@ -18,71 +22,43 @@ export function ProgramPanel({
   description,
   href,
   cta,
-  variant,
+  imageSrc,
+  imageAlt,
+  emphasis = "solid",
 }: ProgramPanelProps) {
-  const isAthlete = variant === "athlete";
+  const src = sftImageUrl(imageSrc, 1500);
 
   return (
     <Link
       href={href}
-      className={cn(
-        "group relative flex min-h-[22rem] flex-col justify-end overflow-hidden p-8 sm:min-h-[26rem] sm:p-10",
-        "bg-gradient-to-br from-card via-background to-ink",
-        "transition-[transform,box-shadow] duration-300 hover:shadow-[0_0_0_1px_rgba(196,30,58,0.35)]",
-        isAthlete
-          ? "lg:skew-y-0"
-          : "",
-      )}
+      className="group relative flex min-h-[22rem] flex-col justify-end overflow-hidden sm:min-h-[26rem]"
     >
+      <Image
+        src={src}
+        alt={imageAlt}
+        fill
+        className="object-cover transition duration-500 group-hover:scale-[1.03]"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+      />
       <div
-        className={cn(
-          "absolute inset-0 opacity-90",
-          isAthlete
-            ? "bg-[linear-gradient(135deg,#0a0c10_0%,#12161f_45%,#1a1200_100%)]"
-            : "bg-[linear-gradient(160deg,#06080c_0%,#12161f_55%,#0a0c10_100%)]",
-        )}
+        className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20"
         aria-hidden
       />
-      {isAthlete ? (
-        <>
-          <div
-            className="absolute -right-8 top-0 h-full w-1/2 skew-x-[-12deg] bg-accent/10"
-            aria-hidden
-          />
-          <div
-            className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-accent/80 to-transparent"
-            aria-hidden
-          />
-        </>
-      ) : (
-        <div
-          className="absolute left-0 top-8 h-24 w-1 bg-brand"
-          aria-hidden
-        />
-      )}
-      <span
-        className={cn(
-          "absolute right-6 top-6 font-display text-7xl font-bold uppercase leading-none opacity-[0.07] sm:text-8xl",
-          isAthlete ? "text-accent" : "text-brand",
-        )}
-        aria-hidden
-      >
-        {isAthlete ? "PERF" : "TRAIN"}
-      </span>
-      <div className="relative z-10 max-w-md">
-        <Eyebrow tone={isAthlete ? "accent" : "brand"}>{eyebrow}</Eyebrow>
-        <h3 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
+      <div className="relative z-10 p-8 sm:p-10">
+        <Eyebrow tone="light">{eyebrow}</Eyebrow>
+        <h3
+          className={
+            emphasis === "outline"
+              ? "mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-outline-ghost sm:text-5xl"
+              : "mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl"
+          }
+        >
           {title}
         </h3>
-        <p className="mt-4 text-base leading-relaxed text-white/75">
+        <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-300">
           {description}
         </p>
-        <span
-          className={cn(
-            "mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider",
-            isAthlete ? "text-accent" : "text-white",
-          )}
-        >
+        <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white">
           {cta}
           <ArrowRight
             className="size-4 transition-transform duration-200 group-hover:translate-x-1"

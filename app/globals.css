@@ -22,20 +22,20 @@
 }
 
 :root {
-  --background: #0a0c10;
-  --foreground: #f5f7fb;
-  --card: #12161f;
-  --card-foreground: #f5f7fb;
-  --muted: #1a2030;
-  --muted-foreground: #9aa6bc;
-  --primary: #c41e3a;
-  --primary-foreground: #ffffff;
-  --accent: #e8b923;
-  --accent-foreground: #1a1200;
-  --brand: #c41e3a;
-  --brand-foreground: #ffffff;
-  --ink: #06080c;
-  --border: #2a3348;
+  --background: #050505;
+  --foreground: #f7f7f7;
+  --card: #111111;
+  --card-foreground: #f7f7f7;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+  --accent: #d4d4d4;
+  --accent-foreground: #0a0a0a;
+  --brand: #ffffff;
+  --brand-foreground: #0a0a0a;
+  --ink: #000000;
+  --border: #333333;
   --radius: 0.75rem;
 }
 
@@ -62,13 +62,13 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.35;
+  opacity: 0.25;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
 .text-outline-ghost {
-  -webkit-text-stroke: 1px rgb(255 255 255 / 0.12);
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.14);
   color: transparent;
 }
 
@@ -90,7 +90,7 @@ body {
 }
 
 .prose-sft a {
-  color: var(--accent);
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

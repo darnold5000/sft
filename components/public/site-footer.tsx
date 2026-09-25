@@ -16,7 +16,7 @@ export function SiteFooter() {
               height={40}
               className="h-10 w-10 rounded-md object-cover"
             />
-            <span className="font-heading text-xl text-accent">
+            <span className="font-display text-xl font-semibold uppercase tracking-wide text-white">
               {SITE.shortName}
             </span>
           </div>
@@ -27,7 +27,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="mb-3 font-heading text-sm tracking-widest text-accent">
+          <h2 className="mb-3 font-display text-sm tracking-widest text-neutral-400">
             Navigate
           </h2>
           <ul className="space-y-2 text-sm text-white/80">
@@ -60,7 +60,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h2 className="mb-3 font-heading text-sm tracking-widest text-accent">
+          <h2 className="mb-3 font-display text-sm tracking-widest text-neutral-400">
             Contact & hours
           </h2>
           <ul className="space-y-2 text-sm text-white/80">
@@ -111,7 +111,7 @@ export function SiteFooter() {
             Shop merchandise on our{" "}
             <a
               href={SQUARESPACE_STORE_URL}
-              className="text-accent underline-offset-2 hover:underline"
+              className="text-neutral-300 underline-offset-2 hover:text-white hover:underline"
               target="_blank"
               rel="noreferrer"
             >

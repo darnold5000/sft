@@ -48,7 +48,7 @@ export function SiteHeader() {
                 className={cn(
                   "relative rounded-md px-3 py-2 text-sm font-semibold uppercase tracking-wide transition",
                   active
-                    ? "text-white after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-brand"
+                    ? "text-white after:absolute after:bottom-0 after:left-3 after:right-3 after:h-0.5 after:bg-white"
                     : "text-white/75 hover:text-white",
                 )}
               >

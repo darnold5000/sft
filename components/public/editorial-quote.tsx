@@ -22,14 +22,14 @@ export function EditorialQuote({
       className={cn(
         "relative",
         featured
-          ? "border-l-4 border-accent bg-gradient-to-br from-card/80 to-transparent py-8 pl-8 pr-4 lg:col-span-2"
-          : "border-l border-border/80 py-6 pl-6",
+          ? "border-l border-white py-8 pl-8 pr-4 lg:col-span-2"
+          : "border-l border-neutral-700 py-6 pl-6",
         className,
       )}
     >
       <span
         className={cn(
-          "font-display font-bold leading-none text-accent",
+          "font-display font-bold leading-none text-white/25",
           featured ? "text-6xl sm:text-7xl" : "text-4xl",
         )}
         aria-hidden
@@ -38,7 +38,7 @@ export function EditorialQuote({
       </span>
       <p
         className={cn(
-          "leading-relaxed text-foreground/90",
+          "leading-relaxed text-neutral-200",
           featured ? "mt-2 text-lg sm:text-xl" : "mt-1 text-sm sm:text-base",
         )}
       >
@@ -49,11 +49,9 @@ export function EditorialQuote({
           <span className="font-display text-lg font-semibold uppercase tracking-wide text-white">
             {name}
           </span>
-          <span className="mt-1 block text-sm text-muted-foreground">
-            {role}
-          </span>
+          <span className="mt-1 block text-sm text-neutral-400">{role}</span>
           {context ? (
-            <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-accent/90">
+            <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-neutral-500">
               {context}
             </span>
           ) : null}
