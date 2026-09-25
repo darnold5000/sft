@@ -43,6 +43,20 @@ export const ADULT_PROGRAM = {
   bookingHeadline: "Book your adult onboarding call",
   bookingDescription:
     "Start with a 15-minute phone call with Sam. You will answer a few quick questions, pick a time, and we will walk you through next steps — including your starting point session and 30-day Jumpstart.",
+  whatToExpect: [
+    {
+      title: "Onboarding call",
+      body: "A 15-minute phone call with Sam to learn your goals and schedule your starting point session.",
+    },
+    {
+      title: "Starting point session",
+      body: "A 30–40 minute conversation about you and your goals — no workout, just clarity on your path at SFT.",
+    },
+    {
+      title: "30-day Jumpstart",
+      body: "New adults begin with a Jumpstart package before longer-term membership options.",
+    },
+  ],
   testimonialId: "steve-mitchuson",
 } as const;
 
@@ -96,5 +110,19 @@ export const ATHLETE_PROGRAM = {
   bookingHeadline: "Book your athlete onboarding call",
   bookingDescription:
     "Parents: book a 15-minute onboarding call with Sam. You will share athlete details, choose a time, and we will schedule your athlete’s assessment and consultation.",
+  whatToExpect: [
+    {
+      title: "Onboarding call",
+      body: "Parents book a 15-minute call with Sam to review athlete details and next steps.",
+    },
+    {
+      title: "Athlete assessment",
+      body: "A 35–40 minute testing and training session to understand your athlete’s baseline.",
+    },
+    {
+      title: "Training plan",
+      body: "Review results together and choose the right program based on sport, goals, and needs.",
+    },
+  ],
   testimonialId: "martha-metzger",
 } as const;

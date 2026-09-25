@@ -103,34 +103,39 @@ export default function HomePage() {
             gym-goers to competitive athletes.
           </p>
           <div
-            className="motion-reveal mt-5 flex flex-col gap-2.5 md:mt-10 md:flex-row md:flex-wrap md:gap-3"
+            className="motion-reveal mt-5 md:mt-10"
             style={{ animationDelay: "200ms" }}
           >
-            <CtaLink
-              href="/adults"
-              variant="default"
-              size="lg"
-              className="max-md:h-10 max-md:w-full max-md:px-4 max-md:text-sm md:w-auto"
-            >
-              Adult Training
-            </CtaLink>
             <div
-              className="grid grid-cols-2 gap-2.5 max-[359px]:grid-cols-1 md:contents"
+              className="grid grid-cols-2 gap-2.5 max-[359px]:grid-cols-1 md:hidden"
             >
+              <CtaLink
+                href="/adults"
+                variant="outline"
+                size="lg"
+                showArrow={false}
+                className="h-10 px-2.5 text-[0.7rem] leading-tight sm:px-3 sm:text-xs"
+              >
+                Adult Training
+              </CtaLink>
               <CtaLink
                 href="/athletes"
                 variant="outline"
                 size="lg"
-                className="max-md:h-10 max-md:w-full max-md:px-3 max-md:text-sm md:w-auto"
+                showArrow={false}
+                className="h-10 px-2.5 text-[0.7rem] leading-tight sm:px-3 sm:text-xs"
               >
                 Athlete Performance
               </CtaLink>
-              <CtaLink
-                href="/get-started"
-                variant="secondary"
-                size="lg"
-                className="max-md:h-10 max-md:w-full max-md:px-3 max-md:text-sm md:w-auto"
-              >
+            </div>
+            <div className="hidden flex-col gap-3 md:flex md:flex-row md:flex-wrap">
+              <CtaLink href="/adults" variant="default" size="lg">
+                Adult Training
+              </CtaLink>
+              <CtaLink href="/athletes" variant="outline" size="lg">
+                Athlete Performance
+              </CtaLink>
+              <CtaLink href="/get-started" variant="secondary" size="lg">
                 Get Started
               </CtaLink>
             </div>

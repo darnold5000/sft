@@ -1,9 +1,7 @@
 import Image from "next/image";
-import { BackgroundWord } from "@/components/public/background-word";
 import { EditorialQuote } from "@/components/public/editorial-quote";
 import { Eyebrow } from "@/components/public/eyebrow";
 import { ProgramBookingLead } from "@/components/public/program-booking-lead";
-import { ProgramStepsList } from "@/components/public/program-steps-list";
 import { Section } from "@/components/public/section";
 import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
 import { ACUITY } from "@/lib/integrations";
@@ -31,6 +29,7 @@ export default function AthletesPage() {
         subtitle={ATHLETE_PROGRAM.heroSubtitle}
         bookingHeadline={ATHLETE_PROGRAM.bookingHeadline}
         bookingDescription={ATHLETE_PROGRAM.bookingDescription}
+        whatToExpect={[...ATHLETE_PROGRAM.whatToExpect]}
         scheduleUrl={ACUITY.athleteOnboarding}
         scheduleTitle="Athlete Program Onboarding Call"
       />
@@ -87,18 +86,6 @@ export default function AthletesPage() {
         </div>
       </Section>
 
-      <Section className="relative overflow-hidden border-b border-neutral-800 bg-neutral-950 surface-noise">
-        <BackgroundWord className="left-0 top-12 -translate-x-[8%]">
-          Speed
-        </BackgroundWord>
-        <div className="relative">
-          <Eyebrow tone="muted">How our program works</Eyebrow>
-          <div className="mt-8 max-w-3xl">
-            <ProgramStepsList steps={[...ATHLETE_PROGRAM.howItWorks]} />
-          </div>
-        </div>
-      </Section>
-
       <Section className="border-b border-neutral-800 bg-background">
         <EditorialQuote
           featured
@@ -109,19 +96,6 @@ export default function AthletesPage() {
         />
       </Section>
 
-      <Section className="border-b border-neutral-800 bg-ink">
-        <Eyebrow tone="muted">Onboarding</Eyebrow>
-        <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
-          Parent-led sign-up
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          How sign up works for youth and high school athletes at Strength For
-          Today.
-        </p>
-        <div className="mt-10 max-w-3xl">
-          <ProgramStepsList steps={[...ATHLETE_PROGRAM.onboardingSteps]} />
-        </div>
-      </Section>
     </>
   );
 }

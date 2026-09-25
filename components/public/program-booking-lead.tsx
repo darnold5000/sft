@@ -1,5 +1,9 @@
 import { AcuityEmbed } from "@/components/public/acuity-embed";
 import { Eyebrow } from "@/components/public/eyebrow";
+import {
+  ProgramWhatToExpect,
+  type WhatToExpectStep,
+} from "@/components/public/program-what-to-expect";
 import { ProgramTrackNav } from "@/components/public/program-track-nav";
 
 type Track = "adult" | "athlete";
@@ -10,6 +14,7 @@ type Props = {
   subtitle: string;
   bookingHeadline: string;
   bookingDescription: string;
+  whatToExpect: WhatToExpectStep[];
   scheduleUrl: string;
   scheduleTitle: string;
 };
@@ -20,6 +25,7 @@ export function ProgramBookingLead({
   subtitle,
   bookingHeadline,
   bookingDescription,
+  whatToExpect,
   scheduleUrl,
   scheduleTitle,
 }: Props) {
@@ -28,39 +34,40 @@ export function ProgramBookingLead({
       id="book-onboarding"
       className="scroll-mt-24 border-b border-neutral-800 bg-black pt-10 sm:pt-12"
     >
-      <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 sm:pb-10">
-        {/* Acuity calendar + times row needs iframe width ≥ ~800px (live scheduler breakpoint). */}
+      <div className="mx-auto w-full max-w-[85rem] px-4 pb-8 sm:px-6 sm:pb-10">
         <div
-          className="grid grid-cols-1 items-start gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(800px,1.15fr)] xl:gap-6 2xl:gap-8"
+          className="mx-auto grid w-full max-w-[85rem] grid-cols-1 items-start gap-10 xl:grid-cols-[minmax(430px,480px)_minmax(700px,760px)] xl:justify-center xl:gap-14"
         >
-          <div className="min-w-0 xl:max-w-xl">
+          <div className="flex min-w-0 flex-col xl:max-w-[480px]">
             <Eyebrow tone="muted">Programs</Eyebrow>
-            <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-              <h1
-                className="font-display text-[clamp(2rem,5vw,3.25rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
-              >
-                {title}
-              </h1>
+            <h1
+              className="mt-4 font-display text-[clamp(2rem,5vw,3.25rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
+            >
+              {title}
+            </h1>
+            <div className="mt-5 w-full max-w-sm">
               <ProgramTrackNav active={track} />
             </div>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
               {subtitle}
             </p>
 
-            <div className="mt-8 border-t border-neutral-800 pt-8 lg:mt-10 lg:pt-10">
+            <div className="mt-8 border-t border-neutral-800 pt-8">
               <Eyebrow tone="muted">Ready to get started?</Eyebrow>
               <h2
                 className="mt-3 font-display text-2xl font-semibold uppercase tracking-tight text-white sm:text-3xl"
               >
                 {bookingHeadline}
               </h2>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {bookingDescription}
               </p>
             </div>
+
+            <ProgramWhatToExpect steps={whatToExpect} />
           </div>
 
-          <div className="w-full min-w-0 xl:min-w-[800px] xl:max-w-none">
+          <div className="w-full min-w-0 xl:max-w-[760px]">
             <AcuityEmbed
               scheduleUrl={scheduleUrl}
               title={scheduleTitle}

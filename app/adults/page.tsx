@@ -3,7 +3,6 @@ import { BackgroundWord } from "@/components/public/background-word";
 import { EditorialQuote } from "@/components/public/editorial-quote";
 import { Eyebrow } from "@/components/public/eyebrow";
 import { ProgramBookingLead } from "@/components/public/program-booking-lead";
-import { ProgramStepsList } from "@/components/public/program-steps-list";
 import { Section } from "@/components/public/section";
 import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
 import { ACUITY } from "@/lib/integrations";
@@ -31,6 +30,7 @@ export default function AdultsPage() {
         subtitle={ADULT_PROGRAM.heroSubtitle}
         bookingHeadline={ADULT_PROGRAM.bookingHeadline}
         bookingDescription={ADULT_PROGRAM.bookingDescription}
+        whatToExpect={[...ADULT_PROGRAM.whatToExpect]}
         scheduleUrl={ACUITY.adultOnboarding}
         scheduleTitle="Adult Program Onboarding Call"
       />
@@ -77,18 +77,6 @@ export default function AdultsPage() {
         </div>
       </Section>
 
-      <Section className="border-b border-neutral-800 bg-neutral-950">
-        <Eyebrow tone="muted">How it works</Eyebrow>
-        <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
-          From first visit to Jumpstart
-        </h2>
-        <ul className="mt-8 max-w-3xl list-disc space-y-3 pl-5 text-muted-foreground">
-          {ADULT_PROGRAM.howItWorks.map((item) => (
-            <li key={item} className="leading-relaxed">{item}</li>
-          ))}
-        </ul>
-      </Section>
-
       <Section className="border-b border-neutral-800 bg-background">
         <EditorialQuote
           featured
@@ -99,19 +87,6 @@ export default function AdultsPage() {
         />
       </Section>
 
-      <Section className="border-b border-neutral-800 bg-ink">
-        <Eyebrow tone="muted">Onboarding</Eyebrow>
-        <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
-          How sign-up works
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted-foreground">
-          New adult members follow a clear path with Sam — from your onboarding
-          call through your starting point session and 30-day Jumpstart.
-        </p>
-        <div className="mt-10 max-w-3xl">
-          <ProgramStepsList steps={[...ADULT_PROGRAM.onboardingSteps]} />
-        </div>
-      </Section>
     </>
   );
 }
