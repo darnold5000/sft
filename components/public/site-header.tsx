@@ -16,7 +16,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/80 bg-ink/95 backdrop-blur-md">
-      <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-3 px-4 sm:h-[4.5rem] sm:px-6">
+      <div className="mx-auto flex h-[4rem] max-w-7xl items-center justify-between gap-2 px-3.5 md:h-[4.5rem] md:gap-3 md:px-6">
         <Link
           href="/"
           className="flex shrink-0 items-center"
@@ -29,7 +29,7 @@ export function SiteHeader() {
             width={360}
             height={96}
             priority
-            className="h-14 w-auto max-w-[min(360px,62vw)] object-contain object-left mix-blend-lighten sm:h-16"
+            className="h-11 w-auto max-w-[min(300px,58vw)] object-contain object-left mix-blend-lighten md:h-16 md:max-w-[min(360px,62vw)]"
           />
         </Link>
 

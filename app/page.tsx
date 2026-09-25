@@ -40,69 +40,105 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="relative min-h-[min(92vh,52rem)] overflow-hidden border-b border-neutral-800 bg-black">
+      <section
+        className="relative overflow-hidden border-b border-neutral-800 bg-black max-md:h-[clamp(38.75rem,86dvh,43.75rem)] md:min-h-[min(92vh,52rem)]"
+      >
         <div className="absolute inset-0">
           <Image
             src={sftImageUrl(SFT_IMAGES.trainingHero, 2500)}
             alt=""
             fill
-            className="object-cover object-[62%_center] brightness-[1.12] contrast-[1.06] sm:object-[58%_center]"
+            className="object-cover object-[78%_38%] brightness-[1.2] contrast-[1.05] saturate-[0.92] md:object-[58%_center] md:brightness-[1.12] md:contrast-[1.06] md:saturate-100"
             priority
             sizes="100vw"
           />
         </div>
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/15 sm:via-black/38 sm:to-black/10"
+          className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20 md:via-black/45 md:to-black/15"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/40 to-black/5 sm:via-black/32"
+          className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/65 to-black/15 md:via-black/40 md:to-black/5"
           aria-hidden
         />
         <div
-          className="absolute inset-y-0 left-0 w-full max-w-2xl bg-gradient-to-r from-black/75 to-transparent sm:max-w-3xl"
+          className="absolute inset-y-0 left-0 w-full max-w-md bg-gradient-to-r from-black/85 to-transparent md:max-w-3xl md:from-black/75"
           aria-hidden
         />
-        <div className="relative mx-auto flex max-w-7xl flex-col justify-end px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40 lg:min-h-[min(92vh,52rem)]">
-          <Eyebrow tone="light" className="motion-reveal">
+        <div
+          className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-3.5 pb-7 pt-[4.75rem] md:min-h-[min(92vh,52rem)] md:px-6 md:pb-20 md:pt-40"
+        >
+          <Eyebrow tone="light" className="motion-reveal max-md:text-[0.65rem]">
             Crown Point, Indiana · Northwest Indiana
           </Eyebrow>
           <h1
-            className="motion-reveal mt-4 max-w-4xl font-display text-[clamp(2.75rem,7vw,5.5rem)] font-bold uppercase leading-[0.92] tracking-tight text-white"
+            className="motion-reveal mt-2 max-w-4xl font-display font-bold uppercase leading-[0.92] tracking-tight text-white max-md:mt-3 max-md:text-[clamp(1.85rem,8.2vw,2.35rem)] md:mt-4 md:text-[clamp(2.75rem,7vw,5.5rem)]"
             style={{ animationDelay: "80ms" }}
           >
-            Individualized training for{" "}
-            <span className="mt-1 block font-light text-neutral-300 sm:mt-0 sm:inline">
-              adults
-            </span>{" "}
-            <span className="text-neutral-500">&amp;</span>{" "}
-            <span className="font-extrabold text-white">athletes</span>
+            <span className="md:hidden">
+              <span className="block">Individualized</span>
+              <span className="block">Training for</span>
+              <span className="mt-0.5 block text-[clamp(1.9rem,8.5vw,2.4rem)] leading-[0.9]">
+                <span className="font-light text-neutral-300">Adults</span>
+                <span className="text-neutral-500"> &amp; </span>
+                <span className="whitespace-nowrap font-extrabold text-white">
+                  Athletes
+                </span>
+              </span>
+            </span>
+            <span className="hidden md:inline">
+              Individualized training for{" "}
+              <span className="mt-1 block font-light text-neutral-300 sm:mt-0 sm:inline">
+                adults
+              </span>{" "}
+              <span className="text-neutral-500">&amp;</span>{" "}
+              <span className="font-extrabold text-white">athletes</span>
+            </span>
           </h1>
           <p
-            className="motion-reveal mt-6 max-w-xl text-lg leading-relaxed text-neutral-300 sm:text-xl"
+            className="motion-reveal mt-3 max-w-[19rem] text-base leading-snug text-neutral-300 md:mt-6 md:max-w-xl md:text-lg md:leading-relaxed md:text-xl"
             style={{ animationDelay: "140ms" }}
           >
             Semi-private coaching with programs built for you — from first-time
             gym-goers to competitive athletes.
           </p>
           <div
-            className="motion-reveal mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+            className="motion-reveal mt-5 flex flex-col gap-2.5 md:mt-10 md:flex-row md:flex-wrap md:gap-3"
             style={{ animationDelay: "200ms" }}
           >
-            <CtaLink href="/adults" variant="default" size="lg">
+            <CtaLink
+              href="/adults"
+              variant="default"
+              size="lg"
+              className="max-md:h-10 max-md:w-full max-md:px-4 max-md:text-sm md:w-auto"
+            >
               Adult Training
             </CtaLink>
-            <CtaLink href="/athletes" variant="outline" size="lg">
-              Athlete Performance
-            </CtaLink>
-            <CtaLink href="/get-started" variant="secondary" size="lg">
-              Get Started
-            </CtaLink>
+            <div
+              className="grid grid-cols-2 gap-2.5 max-[359px]:grid-cols-1 md:contents"
+            >
+              <CtaLink
+                href="/athletes"
+                variant="outline"
+                size="lg"
+                className="max-md:h-10 max-md:w-full max-md:px-3 max-md:text-sm md:w-auto"
+              >
+                Athlete Performance
+              </CtaLink>
+              <CtaLink
+                href="/get-started"
+                variant="secondary"
+                size="lg"
+                className="max-md:h-10 max-md:w-full max-md:px-3 max-md:text-sm md:w-auto"
+              >
+                Get Started
+              </CtaLink>
+            </div>
           </div>
         </div>
       </section>
 
-      <Section className="border-b border-neutral-800 bg-background">
+      <Section className="border-b border-neutral-800 bg-background max-md:!py-10">
         <div className="mb-12 max-w-3xl">
           <Eyebrow tone="muted">Programs</Eyebrow>
           <h2 className="mt-3 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white sm:text-5xl">
