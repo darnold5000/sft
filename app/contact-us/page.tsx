@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/public/contact-form";
 import { CtaLink } from "@/components/public/cta-link";
 import { Eyebrow } from "@/components/public/eyebrow";
 import { Section } from "@/components/public/section";
-import { ONBOARDING_PATHS } from "@/lib/integrations";
+import { PROGRAM_ROUTES } from "@/lib/site";
 import { createMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
@@ -97,15 +97,15 @@ export default function ContactPage() {
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground lg:mx-0 lg:max-w-xl">
               If you already know which program fits you, skip the general
-              contact form and begin onboarding — we will walk you through intake
-              and scheduling with Sam and the team.
+              contact form and explore the program page — then book your
+              onboarding call with Sam and the team.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
-              <CtaLink href={ONBOARDING_PATHS.adultIntake} variant="default" size="lg">
-                Start adult training
+              <CtaLink href={PROGRAM_ROUTES.adult} variant="default" size="lg">
+                Explore adult training
               </CtaLink>
-              <CtaLink href={ONBOARDING_PATHS.athleteIntake} variant="outline" size="lg">
-                Start athlete training
+              <CtaLink href={PROGRAM_ROUTES.athlete} variant="outline" size="lg">
+                Explore athlete performance
               </CtaLink>
             </div>
           </div>

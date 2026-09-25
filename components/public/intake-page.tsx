@@ -40,7 +40,7 @@ export function IntakePage({
         .
       </p>
       <Link href="/get-started" className={cnLink("mt-4 inline-flex")}>
-        ← Back to Get Started
+        ← Explore program pages
       </Link>
     </Section>
   );

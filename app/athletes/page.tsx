@@ -1,7 +1,16 @@
-import { ProgramBookingHero } from "@/components/public/program-booking-hero";
+import Image from "next/image";
+import { BackgroundWord } from "@/components/public/background-word";
+import { EditorialQuote } from "@/components/public/editorial-quote";
+import { Eyebrow } from "@/components/public/eyebrow";
+import { ProgramPageHero } from "@/components/public/program-page-hero";
+import { ProgramScheduleClosing } from "@/components/public/program-schedule-closing";
+import { ProgramStepsList } from "@/components/public/program-steps-list";
 import { Section } from "@/components/public/section";
+import { SFT_IMAGES, sftImageUrl } from "@/lib/assets";
 import { ACUITY } from "@/lib/integrations";
+import { ATHLETE_PROGRAM } from "@/lib/program-content";
 import { createMetadata } from "@/lib/seo";
+import { getAllTestimonials } from "@/lib/testimonials";
 
 export const metadata = createMetadata({
   title: "Athlete Performance",
@@ -10,67 +19,115 @@ export const metadata = createMetadata({
   path: "/athletes",
 });
 
-const youth = [
-  "Grades 5–8: speed, agility, and safe strength foundations in a competitive, fun environment.",
-  "Technique-first coaching athletes can take to the field or court.",
-];
-
-const highSchool = [
-  "Sport- and position-specific strength and speed work.",
-  "Hands-on form coaching — better on the field, not just in the gym.",
-];
-
-const steps = [
-  "Parent contact info on the scheduler (not the athlete’s).",
-  "15-minute onboarding call, then book the athlete assessment.",
-  "35–40 minute assessment and consultation on results and membership options.",
-];
-
 export default function AthletesPage() {
+  const testimonial =
+    getAllTestimonials().find((t) => t.id === ATHLETE_PROGRAM.testimonialId) ??
+    getAllTestimonials()[0];
+
   return (
     <>
-      <ProgramBookingHero
+      <ProgramPageHero
         track="athlete"
         title="Athlete Performance"
-        subtitle="Youth and high school athletes — speed, strength, and programming built for their sport."
-        bookingHeadline="Book your athlete onboarding call"
-        bookingDescription="Parents: 15 minutes with Sam to share athlete details, pick a time, and schedule the assessment and consultation."
-        scheduleUrl={ACUITY.athleteOnboarding}
-        scheduleTitle="Athlete Program Onboarding Call"
+        subtitle={ATHLETE_PROGRAM.heroSubtitle}
+        imageSrc={SFT_IMAGES.athleteTrainingPanel}
+        imageAlt="High school athlete training at Strength For Today"
       />
 
-      <Section className="bg-ink py-12 sm:py-14">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <h2 className="font-display text-2xl font-semibold uppercase tracking-tight text-foreground-soft">
+      <Section className="border-b border-neutral-800 bg-background">
+        <Eyebrow tone="muted">Programs by age</Eyebrow>
+        <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+          Youth &amp; high school
+        </h2>
+        <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-12">
+          <div className="rounded-xl border border-border bg-card p-8">
+            <h3 className="font-display text-xl font-semibold uppercase tracking-wide text-white">
               Youth (grades 5–8)
-            </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
-              {youth.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <h2 className="mt-10 font-display text-2xl font-semibold uppercase tracking-tight text-foreground-soft">
-              High school
-            </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
-              {highSchool.map((item) => (
+            </h3>
+            <ul className="mt-5 list-disc space-y-2 pl-5 text-muted-foreground">
+              {ATHLETE_PROGRAM.youth.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
-          <div>
-            <h2 className="font-display text-2xl font-semibold uppercase tracking-tight text-foreground-soft">
-              How onboarding works
-            </h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
-              {steps.map((item) => (
+          <div className="rounded-xl border border-border bg-card p-8">
+            <h3 className="font-display text-xl font-semibold uppercase tracking-wide text-white">
+              High school
+            </h3>
+            <ul className="mt-5 list-disc space-y-2 pl-5 text-muted-foreground">
+              {ATHLETE_PROGRAM.highSchool.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
         </div>
       </Section>
+
+      <Section className="border-b border-neutral-800 bg-black">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border lg:aspect-auto lg:min-h-[20rem]">
+            <Image
+              src={sftImageUrl(SFT_IMAGES.athleteTrainingA, 1600)}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-border lg:aspect-auto lg:min-h-[20rem]">
+            <Image
+              src={sftImageUrl(SFT_IMAGES.athleteTrainingB, 1600)}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        </div>
+      </Section>
+
+      <Section className="relative overflow-hidden border-b border-neutral-800 bg-neutral-950 surface-noise">
+        <BackgroundWord className="left-0 top-12 -translate-x-[8%]">
+          Speed
+        </BackgroundWord>
+        <div className="relative">
+          <Eyebrow tone="muted">How our program works</Eyebrow>
+          <div className="mt-8 max-w-3xl">
+            <ProgramStepsList steps={[...ATHLETE_PROGRAM.howItWorks]} />
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-b border-neutral-800 bg-background">
+        <EditorialQuote
+          featured
+          quote={testimonial.quote}
+          name={testimonial.name}
+          role={testimonial.role}
+          context={testimonial.context}
+        />
+      </Section>
+
+      <Section className="border-b border-neutral-800 bg-ink">
+        <Eyebrow tone="muted">Onboarding</Eyebrow>
+        <h2 className="mt-3 font-display text-3xl font-semibold uppercase tracking-tight text-white sm:text-4xl">
+          Parent-led sign-up
+        </h2>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          How sign up works for youth and high school athletes at Strength For
+          Today.
+        </p>
+        <div className="mt-10 max-w-3xl">
+          <ProgramStepsList steps={[...ATHLETE_PROGRAM.onboardingSteps]} />
+        </div>
+      </Section>
+
+      <ProgramScheduleClosing
+        scheduleUrl={ACUITY.athleteOnboarding}
+        scheduleTitle="Athlete Program Onboarding Call"
+        headline={ATHLETE_PROGRAM.bookingHeadline}
+        description={ATHLETE_PROGRAM.bookingDescription}
+      />
     </>
   );
 }
